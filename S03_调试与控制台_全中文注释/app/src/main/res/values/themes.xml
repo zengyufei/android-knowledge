@@ -1,0 +1,139 @@
+<!-- 
+values-night 和 values 文件夹的区别：
+
+1. 调用时机：
+   - values：默认资源文件夹，在任何情况下都会被调用。
+   - values-night：仅在设备处于夜间模式时被调用。
+
+2. 优先级：
+   - 当设备处于夜间模式时，系统会优先使用 values-night 中的资源。
+   - 如果 values-night 中没有定义某个资源，系统会回退到 values 中寻找。
+
+3. 用途：
+   - values：定义应用的默认主题、样式和颜色等资源。
+   - values-night：专门用于定义夜间模式下的主题、样式和颜色等资源。
+
+4. 生命周期影响：
+   - 在应用启动时，系统会根据当前的显示模式选择加载哪个文件夹中的资源。
+   - 如果用户在运行时切换显示模式，系统会重新创建活动以应用新的主题。
+
+5. 未被调用的情况：
+   - values-night：当设备不处于夜间模式时，这个文件夹中的资源不会被使用。
+   - values：除非有更具体的限定符匹配当前配置，否则始终会被调用。
+
+使用这两个文件夹可以方便地为应用实现日/夜间模式的主题切换，提高用户体验。
+-->
+
+<!-- 
+resources 标签：
+- 作用：定义应用程序的资源
+- 可选属性：xmlns:tools（用于指定Android工具命名空间）
+- 含义：包含所有主题、样式、颜色等资源定义
+- 用法：作为资源文件的根元素
+- 优点：集中管理应用资源，便于维护
+- 缺点：大型应用可能导致文件过大
+- 注意：必须包含xmlns:android属性
+- 替代方案：无直接替代，是Android资源系统的核心
+- 推荐：保持使用，是Android开发的标准做法
+- 默认值：无，必须显式声明
+- 原因：为资源定义提供必要的结构和命名空间
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- 
+        style 标签：
+    - 作用：定义应用主题或样式
+    - 可选属性：name（样式名称），parent（父主题）
+    - 含义：创建可重用的样式集合
+    - 用法：在此定义主题，然后在AndroidManifest.xml中应用
+    - 优点：统一管理UI样式，提高代码复用
+    - 缺点：过多自定义可能导致维护困难
+    - 注意：parent属性决定了继承的基础主题
+    - 替代方案：直接在布局XML中定义样式（不推荐）
+    - 推荐：使用Material Design主题作为基础
+    - 默认值：无，需要明确定义
+    - 原因：提供应用的基础视觉风格
+    -->    
+    
+    <!-- 基础应用主题 -->
+    <style name="Base.Theme.MyApplication" parent="Theme.Material3.DayNight">
+        <!-- 
+        parent 属性：
+        - 作用：指定当前主题的父主题，从而继承父主题的所有属性和样式
+        - 可选项：
+          1. Theme.Material3.DayNight.NoActionBar：Material Design 3 主题，支持日/夜间模式切换，无 ActionBar
+          2. Theme.Material3.Light.NoActionBar：Material Design 3 浅色主题，无 ActionBar
+          3. Theme.Material3.Dark.NoActionBar：Material Design 3 深色主题，无 ActionBar
+          4. Theme.AppCompat.Light：AppCompat 浅色主题，兼容旧版本 Android
+          5. Theme.AppCompat.Dark：AppCompat 深色主题，兼容旧版本 Android
+          6. Theme.MaterialComponents.DayNight：Material Design 2 主题，支持日/夜间模式切换
+        - 功能：
+          1. 继承父主题的所有样式和属性
+          2. 允许在子主题中覆盖或扩展父主题的属性
+          3. 提供一致的视觉风格基础
+        - 作用：
+          1. 确保应用遵循统一的设计语言
+          2. 减少重复代码，提高开发效率
+          3. 便于全局样式管理和更新
+        - 影响：
+          1. 决定应用的基础外观和行为
+          2. 影响控件的默认样式和颜色
+          3. 可能影响应用的性能和兼容性
+          4. 更改父主题可能需要相应调整子主题中的自定义样式
+        -->
+        <!-- 在此处自定义你的浅色主题 -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+            
+        <!-- 
+        关于从第三方获取主题：
+        
+        1. 是的，您可以从第三方获取主题。这通常通过添加第三方库或使用预制的主题包来实现。
+        
+        2. 主流的第三方主题库包括：
+        - Material Components for Android：Google官方的Material Design主题库
+        - AppCompat：用于向后兼容的主题库
+        - ThemeOverlay：用于局部主题覆盖的库
+        - MDC-Android：Material Design Components for Android
+        - Lottie：用于添加动画效果的主题库
+        - Glide：图片加载库，也提供了一些主题选项
+        
+        3. 安装自定义主题的步骤：
+        a. 在app/build.gradle文件中添加依赖：
+            implementation 'com.google.android.material:material:1.5.0'
+        
+        b. 在themes.xml文件中使用新主题：
+            <style name="Theme.MyCustomTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+                <- 自定义主题属性 ->
+            </style>
+        
+        c. 在AndroidManifest.xml中应用主题：
+            <application
+                android:theme="@style/Theme.MyCustomTheme"
+                ...>
+            </application>
+        
+        d. 如果是第三方主题包，按照其文档说明进行集成和使用
+        
+        4. 使用自定义主题的注意事项：
+        - 确保主题与应用的设计语言一致
+        - 测试不同设备和Android版本上的兼容性
+        - 考虑性能影响，特别是对于复杂的自定义主题
+        - 遵循Material Design指南以保持用户体验的一致性
+        -->
+    </style>
+
+    <!-- 
+    style 标签（用于主题继承）：
+    - 作用：创建基于基础主题的应用主题
+    - 可选属性：同上
+    - 含义：定义实际使用的应用主题
+    - 用法：在AndroidManifest.xml中引用此主题
+    - 优点：允许在不修改基础主题的情况下进行覆盖
+    - 缺点：可能导致主题定义分散
+    - 注意：确保parent属性正确指向基础主题
+    - 替代方案：直接使用基础主题（可能限制灵活性）
+    - 推荐：保持这种结构，便于后续主题扩展
+    - 默认值：无，需要明确定义
+    - 原因：提供一个额外的自定义层，增加灵活性
+    -->
+    <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" />
+</resources>

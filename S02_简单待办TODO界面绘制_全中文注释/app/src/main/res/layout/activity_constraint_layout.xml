@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+这个XML文件定义了ConstraintLayoutActivity的用户界面布局。
+它就像是一个灵活的拼图游戏，展示了如何使用ConstraintLayout来精确定位和约束界面元素。
+
+作用：
+1. 展示ConstraintLayout的基本用法和高级特性
+2. 提供不同场景下ConstraintLayout的使用示例
+
+生命周期：
+- 在ConstraintLayoutActivity创建时被加载（onCreate阶段）
+- 当Activity重新创建（如屏幕旋转）时会重新加载
+
+文件位置和引用：
+- 位于app/src/main/res/layout/目录下
+- 在ConstraintLayoutActivity中通过setContentView(R.layout.activity_constraint_layout)引用
+-->
+
+<!-- ScrollView：滚动视图，允许内容在屏幕范围内滚动 -->
+<!-- 
+属性说明：
+xmlns:android, xmlns:app
+- 作用：定义XML命名空间
+- 可选值：固定的URL字符串
+- 推荐：保持默认值，这些是标准命名空间
+- 默认值：如shown
+- 默认原因：允许使用Android标准属性和ConstraintLayout特有属性
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- ConstraintLayout：约束布局，用于灵活定位和约束子视图 -->
+    <!-- 
+    属性说明：
+    android:padding
+    - 作用：设置内部元素与ConstraintLayout边缘的间距
+    - 可选值：具体尺寸（如"16dp"）
+    - 推荐：使用适当的padding增加视觉舒适度
+    - 默认值：无
+    - 默认原因：允许开发者根据需求自定义间距
+    -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- TextView：显示标题文本 -->
+        <!-- 
+        属性说明：
+        app:layout_constraintTop_toTopOf, app:layout_constraintStart_toStartOf, app:layout_constraintEnd_toEndOf
+        - 作用：设置视图的顶部、开始和结束边缘的约束
+        - 可选值：parent（父容器）或其他视图的ID
+        - 推荐：使用parent使标题居中显示
+        - 默认值：无
+        - 默认原因：ConstraintLayout要求明确设置约束
+        -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ConstraintLayout 示例"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- 场景1：基本约束 -->
+        <!-- 
+        属性说明：
+        app:layout_constraintTop_toBottomOf
+        - 作用：设置视图的顶部边缘相对于指定视图底部的约束
+        - 可选值：其他视图的ID
+        - 推荐：用于垂直排列视图
+        - 默认值：无
+        - 默认原因：ConstraintLayout要求明确设置约束
+        -->
+        <TextView
+            android:id="@+id/scene1_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="基本约束"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"/>
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="左上"
+            app:layout_constraintTop_toBottomOf="@id/scene1_title"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <!-- 
+        属性说明：
+        app:layout_constraintBottom_toBottomOf, app:layout_constraintEnd_toEndOf
+        - 作用：设置视图的底部和结束边缘的约束
+        - 可选值：parent（父容器）或其他视图的ID
+        - 推荐：用于定位到右下角
+        - 默认值：无
+        - 默认原因：ConstraintLayout要求明确设置约束
+        -->
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="右下"
+            app:layout_constraintBottom_toBottomOf="@id/button1"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- 场景2：链（chain） -->
+        <TextView
+            android:id="@+id/scene2_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="链（chain）"
+            app:layout_constraintTop_toBottomOf="@id/button1"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp"/>
+
+        <!-- 
+        属性说明：
+        app:layout_constraintHorizontal_chainStyle
+        - 作用：设置水平链的样式
+        - 可选值：spread（均匀分布）, spread_inside（两端对齐）, packed（紧凑）
+        - 推荐：根据设计需求选择合适的链样式
+        - 默认值：spread
+        - 默认原因：均匀分布通常视觉效果较好
+        -->
+        <Button
+            android:id="@+id/chain1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="链 1"
+            app:layout_constraintTop_toBottomOf="@id/scene2_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/chain2"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            android:layout_marginTop="8dp"/>
+
+        <Button
+            android:id="@+id/chain2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="链 2"
+            app:layout_constraintTop_toTopOf="@id/chain1"
+            app:layout_constraintStart_toEndOf="@id/chain1"
+            app:layout_constraintEnd_toStartOf="@id/chain3"/>
+
+        <Button
+            android:id="@+id/chain3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="链 3"
+            app:layout_constraintTop_toTopOf="@id/chain1"
+            app:layout_constraintStart_toEndOf="@id/chain2"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- 场景3：比例布局 -->
+        <TextView
+            android:id="@+id/scene3_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="比例布局"
+            app:layout_constraintTop_toBottomOf="@id/chain1"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp"/>
+
+        <!-- 
+        属性说明：
+        app:layout_constraintDimensionRatio
+        - 作用：设置视图的宽高比
+        - 可选值：比例字符串（如"2:1"）
+        - 推荐：用于创建固定比例的视图
+        - 默认值：无
+        - 默认原因：默认不设置比例，允许开发者自定义
+
+        app:layout_constraintWidth_percent
+        - 作用：设置视图宽度占父容器的百分比
+        - 可选值：0到1之间的浮点数
+        - 推荐：用于创建响应式布局
+        - 默认值：无
+        - 默认原因：默认不设置百分比，允许开发者自定义
+        -->
+        <Button
+            android:id="@+id/ratio_button"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="2:1 比例"
+            app:layout_constraintDimensionRatio="2:1"
+            app:layout_constraintTop_toBottomOf="@id/scene3_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_percent="0.7"
+            android:layout_marginTop="8dp"/>
+
+        <!-- 场景4：辅助线（Guideline）的使用 -->
+        <TextView
+            android:id="@+id/scene4_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="辅助线（Guideline）的使用"
+            app:layout_constraintTop_toBottomOf="@id/ratio_button"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp"/>
+
+        <!-- 
+        属性说明：
+        android:orientation
+        - 作用：设置Guideline的方向
+        - 可选值：vertical（垂直）, horizontal（水平）
+        - 推荐：根据布局需求选择合适的方向
+        - 默认值：无，必须明确指定
+        - 默认原因：Guideline的方向决定了它如何影响其他视图的布局
+
+        app:layout_constraintGuide_percent
+        - 作用：设置Guideline在父容器中的位置百分比
+        - 可选值：0到1之间的浮点数
+        - 推荐：用于创建灵活的布局分割
+        - 默认值：无，必须明确指定
+        - 默认原因：允许开发者精确控制Guideline的位置
+        -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3"/>
+
+        <Button
+            android:id="@+id/guideline_button1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="左侧"
+            app:layout_constraintTop_toBottomOf="@id/scene4_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guideline"
+            android:layout_marginTop="8dp"/>
+
+        <Button
+            android:id="@+id/guideline_button2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="右侧"
+            app:layout_constraintTop_toTopOf="@id/guideline_button1"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

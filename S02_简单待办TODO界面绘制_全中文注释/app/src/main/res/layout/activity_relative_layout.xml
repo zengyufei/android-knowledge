@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+这个XML文件定义了RelativeLayoutActivity的用户界面布局。
+它就像是一个灵活的画布，展示了如何使用RelativeLayout来组织界面元素。
+
+作用：
+1. 展示RelativeLayout的基本用法和特性
+2. 提供不同场景下RelativeLayout的使用示例
+
+生命周期：
+- 在RelativeLayoutActivity创建时被加载（onCreate阶段）
+- 当Activity重新创建（如屏幕旋转）时会重新加载
+
+文件位置和引用：
+- 位于app/src/main/res/layout/目录下
+- 在RelativeLayoutActivity中通过setContentView(R.layout.activity_relative_layout)引用
+-->
+
+<!-- ScrollView：滚动视图，允许内容在屏幕范围内滚动 -->
+<!-- 
+属性说明：
+android:layout_width, android:layout_height
+- 作用：定义视图的宽度和高度
+- 可选值：match_parent（填充父容器）, wrap_content（适应内容大小）, 具体尺寸（如"100dp"）
+- 推荐：match_parent，因为我们希望ScrollView填满整个屏幕
+- 默认值：wrap_content
+- 默认原因：允许视图根据内容自适应大小，但在这里我们需要它填满屏幕
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- RelativeLayout：相对布局，用于灵活定位子视图 -->
+    <!-- 
+    属性说明：
+    android:padding
+    - 作用：设置内部元素与RelativeLayout边缘的间距
+    - 可选值：具体尺寸（如"16dp"）
+    - 推荐：使用适当的padding增加视觉舒适度
+    - 默认值：无
+    - 默认原因：允许开发者根据需求自定义间距
+    -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- TextView：显示标题文本 -->
+        <!-- 
+        属性说明：
+        android:id
+        - 作用：为视图指定唯一标识符
+        - 可选值：任何有效的资源ID（如"@+id/title"）
+        - 推荐：使用描述性名称
+        - 默认值：无
+        - 默认原因：允许开发者自定义ID，便于在代码中引用
+
+        android:layout_centerHorizontal
+        - 作用：将视图水平居中于父布局
+        - 可选值：true（居中）, false（不居中）
+        - 推荐：根据设计需求选择
+        - 默认值：false
+        - 默认原因：默认不改变视图位置，允许开发者自定义
+
+        android:layout_marginBottom
+        - 作用：设置视图底部的外边距
+        - 可选值：具体尺寸（如"16dp"）
+        - 推荐：使用适当的边距增加视觉间隔
+        - 默认值：0dp
+        - 默认原因：默认无边距，允许开发者自定义
+        -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RelativeLayout 示例"
+            android:textSize="24sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- 场景1：相对于父布局定位 -->
+        <!-- 
+        属性说明：
+        android:layout_below
+        - 作用：将视图放置在指定ID的视图下方
+        - 可选值：另一个视图的ID（如"@id/title"）
+        - 推荐：用于垂直排列视图
+        - 默认值：无
+        - 默认原因：默认不相对于其他视图定位，允许开发者自定义
+
+        android:background
+        - 作用：设置视图的背景
+        - 可选值：颜色值、drawable资源等
+        - 推荐：使用主题一致的背景色
+        - 默认值：透明
+        - 默认原因：允许开发者自定义背景
+        -->
+        <RelativeLayout
+            android:id="@+id/scene1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:background="#E0E0E0"
+            android:padding="8dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="相对于父布局定位"
+                android:layout_centerHorizontal="true"/>
+
+            <!-- 
+            属性说明：
+            android:layout_alignParentStart
+            - 作用：将视图对齐到父布局的开始边缘
+            - 可选值：true（对齐）, false（不对齐）
+            - 推荐：用于左对齐（从左到右布局）或右对齐（从右到左布局）
+            - 默认值：false
+            - 默认原因：默认不改变视图位置，允许开发者自定义
+
+            android:layout_alignParentTop
+            - 作用：将视图对齐到父布局的顶部边缘
+            - 可选值：true（对齐）, false（不对齐）
+            - 推荐：用于顶部对齐
+            - 默认值：false
+            - 默认原因：默认不改变视图位置，允许开发者自定义
+            -->
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="左上角"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"/>
+
+            <!-- 
+            属性说明：
+            android:layout_alignParentEnd
+            - 作用：将视图对齐到父布局的结束边缘
+            - 可选值：true（对齐）, false（不对齐）
+            - 推荐：用于右对齐（从左到右布局）或左对齐（从右到左布局）
+            - 默认值：false
+            - 默认原因：默认不改变视图位置，允许开发者自定义
+
+            android:layout_alignParentBottom
+            - 作用：将视图对齐到父布局的底部边缘
+            - 可选值：true（对齐）, false（不对齐）
+            - 推荐：用于底部对齐
+            - 默认值：false
+            - 默认原因：默认不改变视图位置，允许开发者自定义
+            -->
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="右下角"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+
+        <!-- 场景2：相对于其他视图定位 -->
+        <RelativeLayout
+            android:id="@+id/scene2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/scene1"
+            android:background="#E0E0E0"
+            android:padding="8dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/scene2_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="相对于其他视图定位"
+                android:layout_centerHorizontal="true"/>
+
+            <!-- 
+            属性说明：
+            android:layout_centerInParent
+            - 作用：将视图居中于父布局
+            - 可选值：true（居中）, false（不居中）
+            - 推荐：用于创建居中的焦点元素
+            - 默认值：false
+            - 默认原因：默认不改变视图位置，允许开发者自定义
+            -->
+            <Button
+                android:id="@+id/center_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="中心"
+                android:layout_centerInParent="true"/>
+
+            <!-- 
+            属性说明：
+            android:layout_toStartOf
+            - 作用：将视图放置在指定ID的视图的开始侧（左侧，在LTR布局中）
+            - 可选值：另一个视图的ID
+            - 推荐：用于水平排列视图
+            - 默认值：无
+            - 默认原因：默认不相对于其他视图定位，允许开发者自定义
+
+            android:layout_alignTop
+            - 作用：将视图的顶部与指定ID的视图顶部对齐
+            - 可选值：另一个视图的ID
+            - 推荐：用于垂直对齐视图
+            - 默认值：无
+            - 默认原因：默认不相对于其他视图对齐，允许开发者自定义
+            -->
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="左边"
+                android:layout_toStartOf="@id/center_button"
+                android:layout_alignTop="@id/center_button"/>
+
+            <!-- 
+            属性说明：
+            android:layout_toEndOf
+            - 作用：将视图放置在指定ID的视图的结束侧（右侧，在LTR布局中）
+            - 可选值：另一个视图的ID
+            - 推荐：用于水平排列视图
+            - 默认值：无
+            - 默认原因：默认不相对于其他视图定位，允许开发者自定义
+            -->
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="右边"
+                android:layout_toEndOf="@id/center_button"
+                android:layout_alignTop="@id/center_button"/>
+        </RelativeLayout>
+
+        <!-- 场景3：对齐方式 -->
+        <RelativeLayout
+            android:id="@+id/scene3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/scene2"
+            android:background="#E0E0E0"
+            android:padding="8dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/scene3_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="对齐方式"
+                android:layout_centerHorizontal="true"/>
+
+            <Button
+                android:id="@+id/align_left"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="左对齐"
+                android:layout_below="@id/scene3_title"/>
+
+            <!-- 
+            属性说明：
+            android:layout_alignStart
+            - 作用：将视图的开始边缘与指定ID的视图的开始边缘对齐
+            - 可选值：另一个视图的ID
+            - 推荐：用于水平对齐视图
+            - 默认值：无
+            - 默认原因：默认不相对于其他视图对齐，允许开发者自定义
+            -->
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="左对齐(长)"
+                android:layout_below="@id/align_left"
+                android:layout_alignStart="@id/align_left"/>
+        </RelativeLayout>
+
+        <!-- 场景4：居中布局 -->
+        <RelativeLayout
+            android:id="@+id/scene4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/scene3"
+            android:background="#E0E0E0"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/scene4_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="居中布局"
+                android:layout_centerHorizontal="true"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="水平居中"
+                android:layout_below="@id/scene4_title"
+                android:layout_centerHorizontal="true"/>
+
+            <!-- 
+            属性说明：
+            android:layout_centerVertical
+            - 作用：将视图垂直居中于父布局
+            - 可选值：true（居中）, false（不居中）
+            - 推荐：用于垂直居中元素
+            - 默认值：false
+            - 默认原因：默认不改变视图位置，允许开发者自定义
+            -->
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="垂直居中"
+                android:layout_centerVertical="true"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="完全居中"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</ScrollView>

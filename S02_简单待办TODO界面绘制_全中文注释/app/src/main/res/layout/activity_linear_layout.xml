@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+这个XML文件定义了LinearLayoutActivity的用户界面布局。
+它就像是一个有序的书架，展示了如何使用LinearLayout来组织界面元素。
+
+作用：
+1. 展示LinearLayout的基本用法和特性
+2. 提供不同场景下LinearLayout的使用示例
+
+生命周期：
+- 在LinearLayoutActivity创建时被加载（onCreate阶段）
+- 当Activity重新创建（如屏幕旋转）时会重新加载
+
+文件位置和引用：
+- 位于app/src/main/res/layout/目录下
+- 在LinearLayoutActivity中通过setContentView(R.layout.activity_linear_layout)引用
+-->
+
+<!-- ScrollView：滚动视图，允许内容在屏幕范围内滚动 -->
+<!-- 
+属性说明：
+android:layout_width, android:layout_height
+- 作用：定义视图的宽度和高度
+- 可选值：match_parent（填充父容器）, wrap_content（适应内容大小）, 具体尺寸（如"100dp"）
+- 推荐：match_parent，因为我们希望ScrollView填满整个屏幕
+- 默认值：wrap_content
+- 默认原因：允许视图根据内容自适应大小，但在这里我们需要它填满屏幕
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- LinearLayout：线性布局，用于垂直排列内部的示例 -->
+    <!-- 
+    属性说明：
+    android:orientation
+    - 作用：设置LinearLayout的排列方向
+    - 可选值：vertical（垂直）, horizontal（水平）
+    - 推荐：vertical，因为我们希望垂直排列多个LinearLayout示例
+    - 默认值：horizontal
+    - 默认原因：水平排列更常用，但在这里我们需要垂直排列
+
+    android:padding
+    - 作用：设置内部元素与LinearLayout边缘的间距
+    - 可选值：具体尺寸（如"16dp"）
+    - 推荐：使用适当的padding增加视觉舒适度
+    - 默认值：无
+    - 默认原因：允许开发者根据需求自定义间距
+    -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- TextView：显示标题文本 -->
+        <!-- 
+        属性说明：
+        android:text
+        - 作用：设置显示的文本内容
+        - 可选值：直接文本或字符串资源引用（如"@string/linear_layout_title"）
+        - 推荐：使用字符串资源引用，便于多语言支持
+        - 默认值：无
+        - 默认原因：允许开发者自定义文本内容
+
+        android:textSize
+        - 作用：设置文本大小
+        - 可选值：具体尺寸（如"24sp"）
+        - 推荐：使用sp单位，以适应用户的字体大小设置
+        - 默认值：14sp
+        - 默认原因：系统默认的文本大小
+
+        android:layout_marginBottom
+        - 作用：设置视图底部的外边距
+        - 可选值：具体尺寸（如"16dp"）
+        - 推荐：使用适当的边距增加视觉间隔
+        - 默认值：0dp
+        - 默认原因：默认无边距，允许开发者自定义
+        -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LinearLayout 示例"
+            android:textSize="24sp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- 场景1：垂直布局 -->
+        <!-- 
+        属性说明：
+        android:background
+        - 作用：设置背景颜色
+        - 可选值：颜色值（如"#E0E0E0"）或颜色资源引用
+        - 推荐：使用颜色资源引用，便于主题统一管理
+        - 默认值：透明
+        - 默认原因：允许开发者自定义背景
+
+        android:layout_marginBottom
+        - 作用：设置底部外边距
+        - 可选值：具体尺寸（如"16dp"）
+        - 推荐：使用适当的边距增加视觉间隔
+        - 默认值：0dp
+        - 默认原因：默认无边距，允许开发者自定义
+        -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#E0E0E0"
+            android:padding="8dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="垂直布局"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="按钮 1"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="按钮 2"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="按钮 3"/>
+        </LinearLayout>
+
+        <!-- 场景2：水平布局 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#E0E0E0"
+            android:padding="8dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="水平布局"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="按钮 1"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="按钮 2"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="按钮 3"/>
+        </LinearLayout>
+
+        <!-- 场景3：权重分配 -->
+        <!-- 
+        属性说明：
+        android:layout_weight
+        - 作用：设置视图在剩余空间中的权重
+        - 可选值：整数（如"1"、"2"、"3"等）
+        - 推荐：根据需要分配权重，数值越大占比越大
+        - 默认值：0
+        - 默认原因：默认不参与权重分配，允许开发者自定义
+
+        android:layout_width="0dp"（在水平布局中）
+        - 作用：配合layout_weight使用，让视图宽度根据权重分配
+        - 可选值：0dp或wrap_content
+        - 推荐：使用0dp，完全依赖权重分配宽度
+        - 默认值：wrap_content
+        - 默认原因：默认适应内容大小，但在使用权重时应设为0dp
+        -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#E0E0E0"
+            android:padding="8dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="权重分配"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="权重 1"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="权重 2"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="权重 3"/>
+        </LinearLayout>
+
+        <!-- 场景4：嵌套布局 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#E0E0E0"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="嵌套布局"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="左"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="上"/>
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="下"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

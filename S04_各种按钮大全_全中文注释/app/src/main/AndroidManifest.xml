@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+AndroidManifest.xml 就像是一个应用程序的身份证和说明书。
+
+想象一下，这个文件就是一家新开张商店的营业执照和店铺说明：
+1. 商店名称（package属性）：告诉顾客这是哪家店。
+2. 营业许可（权限申请）：列出店铺可以经营的业务。
+3. 店铺布局（组件声明）：描述店铺里有哪些部门。
+4. 店铺招牌（应用图标和标签）：让顾客一眼就能认出这家店。
+
+生命周期：
+- 使用时机：顾客（Android系统）在店铺开张（应用安装）和每次光顾（应用启动）时都会查看。
+- 查看顺序：是了解这家店铺的第一步。
+
+文件位置：
+- 存放位置：位于项目的 app/src/main/AndroidManifest.xml 文件中。
+- 使用方式：Android系统自动读取，不需要开发者手动调用。
+-->
+<!-- manifest 是整个文件的根元素，就像是整个营业执照的底板 -->
+<!-- xmlns 属性定义了使用的XML命名空间，就像是规定了文件的书写语言 -->
+<!-- 
+xmlns:android 属性：
+- 作用：定义Android命名空间
+- 可选值：通常为 "http://schemas.android.com/apk/res/android"
+- 含义：告诉系统这是一个Android应用的配置文件
+- 用法：在根元素中声明，之后的元素可以使用android:前缀
+- 优点：标准化配置，系统能正确解析
+- 缺点：无
+- 注意：必须正确拼写，否则整个文件可能无法解析
+- 替代方案：无实际可用的替代方案
+- 推荐：强烈推荐使用标准命名空间
+- 默认值：无默认值，必须明确声明
+
+xmlns:tools 属性：
+- 作用：定义tools命名空间，用于开发工具
+- 可选值：通常为 "http://schemas.android.com/tools"
+- 含义：提供额外的开发时信息，不影响运行时行为
+- 用法：在根元素中声明，用于指定一些编译时行为
+- 优点：可以提供更多开发时信息和控制
+- 缺点：可能增加文件复杂度
+- 注意：这些属性不会打包到最终APK中
+- 替代方案：可以不使用，但会失去一些开发便利
+- 推荐：建议使用，特别是在需要指定目标SDK等情况下
+- 默认值：无默认值，可以选择性使用
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- application 标签包含了应用的主要配置，就像是详细的店铺说明 -->
+    <!-- 
+    android:allowBackup 属性：
+    - 作用：控制应用是否可以参与数据备份和恢复
+    - 可选值：true（允许备份），false（禁止备份）
+    - 含义：决定用户更换设备时是否可以恢复应用数据
+    - 用法：在application标签中设置
+    - 优点（true）：用户可以在更换设备时恢复数据
+    - 缺点（true）：可能导致敏感数据被备份
+    - 注意：设置为false可能影响用户体验
+    - 替代方案：使用更细粒度的备份策略，如@xml/backup_rules
+    - 推荐：根据应用性质决定，涉及敏感数据时推荐false
+    - 默认值：true
+    - 默认原因：提供更好的用户体验
+
+    android:dataExtractionRules 属性：
+    - 作用：指定数据提取规则文件
+    - 可选值：指向XML资源文件，如@xml/data_extraction_rules
+    - 含义：定义哪些数据可以被提取用于备份
+    - 用法：在Android 12及以上版本使用
+    - 优点：提供更精细的数据备份控制
+    - 缺点：需要额外配置文件
+    - 注意：只在较新的Android版本中有效
+    - 替代方案：在低版本中使用fullBackupContent
+    - 推荐：在支持Android 12及以上的应用中使用
+    - 默认值：无
+    - 原因：需要开发者明确指定备份策略
+
+    android:fullBackupContent 属性：
+    - 作用：指定完整备份内容
+    - 可选值：指向XML资源文件，如@xml/backup_rules
+    - 含义：详细定义应用数据的备份规则
+    - 用法：主要用于Android 12以下版本
+    - 优点：可以精确控制备份内容
+    - 缺点：配置相对复杂
+    - 注意：在新版本中被dataExtractionRules取代
+    - 替代方案：在高版本中使用dataExtractionRules
+    - 推荐：在支持旧版本Android的应用中使用
+    - 默认值：无
+    - 原因：需要开发者明确指定备份策略
+
+    android:icon 属性：
+    - 作用：设置应用图标
+    - 可选值：指向drawable或mipmap资源，如@mipmap/ic_launcher
+    - 含义：定义应用在启动器中显示的图标
+    - 用法：指定一个图像资源
+    - 优点：为应用提供视觉识别
+    - 缺点：无明显缺点
+    - 注意：应提供不同分辨率的图标
+    - 替代方案：可以动态更改图标，但需要额外代码
+    - 推荐：强烈建议设置，是应用的视觉标识
+    - 默认值：无
+    - 原因：应用图标是必要的，需要开发者明确指定
+
+    android:label 属性：
+    - 作用：设置应用名称
+    - 可选值：字符串或字符串资源引用，如@string/app_name
+    - 含义：定义应用在用户设备上显示的名称
+    - 用法：通常引用字符串资源以支持多语言
+    - 优点：为用户提供应用的文字标识
+    - 缺点：无明显缺点
+    - 注意：应简洁明了，易于识别
+    - 替代方案：无实际可用的替代方案
+    - 推荐：必须设置，是应用的文字标识
+    - 默认值：无
+    - 原因：应用名称是必要的，需要开发者明确指定
+
+    android:roundIcon 属性：
+    - 作用：设置圆形应用图标
+    - 可选值：指向drawable或mipmap资源，如@mipmap/ic_launcher_round
+    - 含义：为支持圆形图标的启动器提供专门的圆形图标
+    - 用法：指定一个圆形图像资源
+    - 优点：在某些设备上提供更好的视觉效果
+    - 缺点：需要额外的图标设计
+    - 注意：不是所有启动器都支持圆形图标
+    - 替代方案：可以只使用常规图标（android:icon）
+    - 推荐：建议设置，以适应不同的启动器样式
+    - 默认值：无
+    - 原因：是可选功能，由开发者决定是否提供
+
+    android:supportsRtl 属性：
+    - 作用：声明应用是否支持从右到左（RTL）布局
+    - 可选值：true（支持），false（不支持）
+    - 含义：指示应用是否适配了RTL布局（如阿拉伯语）
+    - 用法：设置为true时，系统会在RTL语言环境下自动调整布局
+    - 优点：提高应用的国际化水平
+    - 缺点：可能需要额外的布局适配工作
+    - 注意：设置为true后，应确保所有布局都正确支持RTL
+    - 替代方案：手动处理RTL布局，但工作量大
+    - 推荐：建议设置为true，以支持更广泛的用户群
+    - 默认值：false
+    - 原因：默认不启用，避免未适配的应用出现布局问题
+
+    android:theme 属性：
+    - 作用：设置应用的默认主题
+    - 可选值：指向style资源，如@style/Theme.MyApplication
+    - 含义：定义应用的整体视觉风格
+    - 用法：指定一个预定义或自定义的主题
+    - 优点：统一应用的视觉风格，简化布局文件
+    - 缺点：如果主题设置不当，可能影响应用的整体外观
+    - 注意：可以在各个Activity中覆盖此设置
+    - 替代方案：在每个Activity中单独设置主题
+    - 推荐：强烈建议设置，用于定义应用的基础视觉风格
+    - 默认值：取决于目标SDK版本的默认主题
+    - 原因：提供一个基础主题，确保应用有一致的外观
+
+    tools:targetApi 属性：
+    - 作用：指定应用的目标API级别
+    - 可选值：整数值，表示Android API级别，如"31"
+    - 含义：告诉开发工具应用针对的Android版本
+    - 用法：在application标签中设置
+    - 优点：抑制针对较新API的警告，改善开发体验
+    - 缺点：可能掩盖实际的兼容性问题
+    - 注意：不影响实际运行，仅用于开发阶段
+    - 替代方案：在build.gradle中设置targetSdkVersion
+    - 推荐：建议使用，特别是当使用了较新的API特性时
+    - 默认值：无
+    - 原因：作为开发工具属性，需要明确指定
+    -->
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication"
+        tools:targetApi="31">
+
+        <!-- 
+        activity 标签：声明应用的一个页面，就像是店铺中的一个部门
+        
+        android:name 属性：
+        - 作用：指定Activity的完整类名
+        - 可选值：类的完整路径，如".MainActivity" 或 "com.example.app.MainActivity"
+        - 含义：定义这个Activity对应的Java或Kotlin类
+        - 用法：必须准确指定类的位置
+        - 优点：明确定义Activity的实现类
+        - 缺点：如果类名或包名变更，需要同步更新
+        - 注意：使用"."开头表示相对于包名的路径
+        - 替代方案：无实际可用的替代方案
+        - 推荐：必须设置，是定义Activity的关键属性
+        - 默认值：无
+        - 原因：系统需要知道Activity类的确切位置
+
+        android:exported 属性：
+        - 作用：声明Activity是否可以被其他应用组件启动
+        - 可选值：true（可以被外部启动），false（不能被外部启动）
+        - 含义：控制Activity的可访问性
+        - 用法：根据Activity的用途设置
+        - 优点（true）：允许其他应用或系统组件启动此Activity
+        - 缺点（true）：可能带来安全风险
+        - 注意：Android 12及以上版本要求明确设置此属性
+        - 替代方案：使用更细粒度的 intent-filter 来控制访问
+        - 推荐：对于启动Activity设为true，其他通常设为false
+        - 默认值：取决于是否有intent-filter，有则默认true，否则false
+        - 原因：平衡开放性和安全性
+
+        android:theme 属性：
+        - 作用：为特定Activity设置主题
+        - 可选值：指向style资源，如"@style/AppTheme.NoActionBar"
+        - 含义：定义Activity的视觉风格
+        - 用法：在activity标签中设置，覆盖应用级主题
+        - 优点：可以为不同Activity设置不同风格
+        - 缺点：可能导致应用风格不一致
+        - 注意：会覆盖application中设置的默认主题
+        - 替代方案：在代码中动态设置主题
+        - 推荐：当Activity需要特殊风格时使用
+        - 默认值：继承application中设置的主题
+        - 原因：提供Activity级别的主题自定义
+
+        android:launchMode 属性：
+        - 作用：定义Activity的启动模式
+        - 可选值：standard, singleTop, singleTask, singleInstance
+        - 含义：控制Activity实例在任务栈中的创建和重用方式
+        - 用法：在activity标签中设置
+        - 优点：可以优化内存使用和用户体验
+        - 缺点：使用不当可能导致应用行为异常
+        - 注意：不同模式会影响Activity的生命周期和回调
+        - 替代方案：在代码中使用Intent flags
+        - 推荐：根据Activity的具体用途选择合适的模式
+        - 默认值：standard
+        - 原因：影响Activity的实例化和任务栈管理
+
+        android:screenOrientation 属性：
+        - 作用：设置Activity的屏幕方向
+        - 可选值：portrait, landscape, sensor, 等
+        - 含义：控制Activity的显示方向
+        - 用法：在activity标签中设置
+        - 优点：可以固定或灵活控制屏幕方向
+        - 缺点：限制可能影响用户体验
+        - 注意：某些设置可能与设备配置冲突
+        - 替代方案：在代码中动态设置方向
+        - 推荐：根据应用内容和用户体验需求选择
+        - 默认值：unspecified（跟随系统设置）
+        - 原因：适应不同的使用场景和设备类型
+        -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+            <!-- 
+            intent-filter 标签：
+            - 作用：定义Activity、Service或BroadcastReceiver可以响应的Intent
+            - 含义：指定组件可以处理的操作和数据类型
+            - 用法：在组件声明中添加，可包含多个action、category和data子标签
+            - 优点：允许组件响应系统或其他应用的隐式Intent
+            - 缺点：可能增加安全风险，需谨慎使用
+            - 注意：过于宽泛的intent-filter可能导致不必要的调用
+            - 替代方案：使用显式Intent直接调用组件
+            - 区别：显式Intent更安全但灵活性较低
+            - 推荐：根据组件功能合理设置，避免过度暴露
+            - 默认值：无，需明确定义
+            - 原因：系统需要知道组件能够响应哪些Intent
+
+            其他属性：
+            1. android:priority
+            - 作用：设置此intent-filter的优先级
+            - 含义：数值越高，优先级越高
+            - 用法：android:priority="100"
+            - 优点：可以控制多个匹配的组件中哪个先被调用
+            - 缺点：可能影响系统的正常调度
+            - 注意：不应过度使用，可能导致应用间冲突
+            - 替代方案：让用户选择使用哪个应用处理Intent
+            - 改动影响：可能改变系统选择组件的顺序
+
+            2. android:autoVerify
+            - 作用：声明此intent-filter用于应用链接的自动验证
+            - 含义：允许系统验证应用是否为特定网域的官方处理程序
+            - 用法：android:autoVerify="true"
+            - 优点：提高用户体验，无需手动选择应用打开链接
+            - 缺点：需要额外的服务器端配置
+            - 注意：仅适用于Android 6.0（API级别23）及以上版本
+            - 替代方案：手动处理深层链接
+            - 改动影响：影响应用如何处理来自网页的链接
+            -->
+            <intent-filter android:priority="100" android:autoVerify="true">
+                <!-- 
+                action 标签：
+                - 作用：指定Intent可以执行的操作
+                - 可选值：预定义的系统操作（如MAIN）或自定义操作
+                - 含义：声明组件可以执行的具体动作
+                - 用法：在intent-filter中添加，可以有多个
+                - 优点：明确组件的功能
+                - 缺点：如果使用自定义action，可能降低兼容性
+                - 注意：至少需要一个action标签
+                - 替代方案：无直接替代，是Intent过滤的核心
+                - 推荐：使用标准系统action，除非有特殊需求
+                - 默认值：无，必须明确指定
+                - 原因：系统需要知道组件能执行什么操作
+                -->
+                <action android:name="android.intent.action.MAIN" />
+
+                <!-- 
+                category 标签：
+                - 作用：为Intent提供附加信息
+                - 可选值：预定义类别（如LAUNCHER）或自定义类别
+                - 含义：进一步限定Intent的类型
+                - 用法：在intent-filter中添加，可以有多个
+                - 优点：提供更精确的Intent匹配
+                - 缺点：过多类别可能限制组件的可访问性
+                - 注意：LAUNCHER类别使Activity显示在应用启动器中
+                - 替代方案：可以不使用，但会影响组件的可见性和可访问性
+                - 推荐：根据组件的用途选择合适的类别
+                - 默认值：无，但MAIN通常与LAUNCHER配对
+                - 原因：提供额外的Intent分类信息
+                -->
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <!-- 
+                data 标签：
+                - 作用：指定Intent可以处理的数据类型
+                - 含义：定义组件可以处理的URI结构和MIME类型
+                - 用法：在intent-filter中添加，可以有多个
+                - 优点：精确控制组件可以响应的数据
+                - 缺点：配置复杂，可能限制组件的通用性
+                - 注意：需要正确设置scheme、host、path等属性
+                - 替代方案：在代码中动态处理不同类型的数据
+                - 改动影响：直接影响组件能否处理特定类型的数据或URI
+                -->
+                <!-- <data android:scheme="https" android:host="example.com" android:pathPrefix="/page" /> -->
+            </intent-filter>
+        </activity>
+
+
+    </application>
+
+</manifest>
