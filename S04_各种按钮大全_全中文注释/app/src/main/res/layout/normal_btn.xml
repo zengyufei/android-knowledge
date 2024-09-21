@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <!-- 
+    androidx.cardview.widget.CardView标签的作用：
+    - 创建具有圆角和阴影效果的卡片式布局容器
+    - 提供Material Design风格的卡片视觉效果
+    
+    其他常用属性：
+    1. app:cardBackgroundColor：设置卡片背景颜色
+    2. app:cardMaxElevation：设置最大阴影高度
+    3. app:cardUseCompatPadding：是否使用兼容填充
+    4. app:contentPadding：设置内容区域的内边距
+    5. app:cardPreventCornerOverlap：防止内容覆盖圆角
+    
+    属性作用和用法：
+    - cardBackgroundColor：如"@color/white"，定义卡片背景色
+    - cardMaxElevation：如"8dp"，控制最大阴影效果
+    - cardUseCompatPadding：true/false，兼容性填充
+    - contentPadding：如"16dp"，内容区域的内边距
+    - cardPreventCornerOverlap：true/false，防止内容覆盖圆角
+    
+    优点：
+    - 提供统一的Material Design卡片样式
+    - 易于使用和自定义
+    - 支持阴影和圆角效果
+    
+    缺点：
+    - 可能增加布局层级，影响性能
+    - 在某些低端设备上可能存在渲染问题
+    
+    注意事项：
+    - 合理使用elevation属性，避免过度使用影响性能
+    - 注意CardView内部布局，避免与圆角冲突
+    
+    替代方案：
+    1. FrameLayout + shape drawable：自定义卡片效果
+    2. MaterialCardView：Material Components库中的增强版CardView
+    3. 自定义View：完全自定义卡片效果
+    
+    与当前方案区别：
+    - FrameLayout + shape：更轻量，但需要更多自定义代码
+    - MaterialCardView：提供更多Material Design特性，但依赖更大
+    - 自定义View：完全控制，但开发成本高
+    
+    改动影响：
+    - 可能影响卡片的视觉效果和交互体验
+    - 需要调整内部布局以适应新的卡片样式
+    - 可能需要更新相关的样式和主题 
+    -->
+<androidx.cardview.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- TextView标签的作用：
+        - 显示文本内容
+        - 提供基本的文本样式和布局控制
+        
+        其他常用属性：
+        1. android:id：为视图指定唯一标识符
+        2. android:textColor：设置文本颜色
+        3. android:gravity：控制文本在TextView内的对齐方式
+        4. android:ellipsize：处理文本溢出情况
+        5. android:maxLines：限制最大行数
+        
+        属性作用和用法：
+        - id：如"@+id/title_text"，用于在代码中引用此TextView
+        - textColor：如"@color/black"，设置文本颜色
+        - gravity：如"center"，使文本居中对齐
+        - ellipsize：如"end"，文本过长时在末尾显示省略号
+        - maxLines：如"2"，限制文本最多显示两行
+        
+        优点：
+        - 简单易用，适用于大多数文本显示场景
+        - 支持富文本和HTML格式
+        - 可自定义外观和行为
+        
+        缺点：
+        - 对于复杂的文本布局支持有限
+        - 大量文本时性能可能不佳
+        
+        注意事项：
+        - 合理设置文本大小，确保可读性
+        - 注意文本溢出和换行处理
+        - 考虑不同屏幕尺寸的适配
+        
+        替代方案：
+        1. AppCompatTextView：提供更好的向后兼容性
+        2. MaterialTextView：Material Design风格的文本视图
+        3. AutoSizeTextView：自动调整文本大小以适应容器
+        
+        与当前方案区别：
+        - AppCompatTextView：更好的兼容性，但可能增加APK大小
+        - MaterialTextView：提供Material Design特性，但依赖更大
+        - AutoSizeTextView：自动调整文本大小，但可能影响布局稳定性
+        
+        改动影响：
+        - 可能影响文本的显示效果和布局
+        - 需要调整相关的样式和主题
+        - 可能需要更新文本内容处理逻辑 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="标准按钮-形状组"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:useDefaultMargins="true">
+
+            <!-- Button标签的作用:
+            - 创建可点击的按钮控件
+            - 用于用户交互和触发操作
+            
+            其他常用属性:
+            1. android:id: 为按钮指定唯一标识符
+            2. android:onClick: 指定点击事件处理方法
+            3. android:enabled: 控制按钮是否可用
+            4. android:textAllCaps: 控制文本是否全大写
+            5. android:drawableStart: 在文本前添加图标
+            
+            属性作用和用法:
+            - id: 如"@+id/submit_button",用于在代码中引用此按钮
+            - onClick: 如"submitForm",指定点击时调用的方法名
+            - enabled: "false"禁用按钮,"true"启用按钮
+            - textAllCaps: "false"保持文本原始大小写
+            - drawableStart: 如"@drawable/icon_submit",添加图标
+            
+            优点:
+            - 简单易用,适用于大多数交互场景
+            - 可自定义外观和行为
+            - 支持无障碍功能
+            
+            缺点:
+            - 默认样式可能不符合特定设计需求
+            - 复杂交互可能需要额外代码支持
+            
+            注意事项:
+            - 合理设置按钮大小,确保可点击区域足够
+            - 考虑不同屏幕尺寸的适配
+            - 注意按钮状态(正常、按下、禁用)的样式一致性
+            
+            替代方案:
+            1. ImageButton: 图像按钮,适合只显示图标的场景
+            2. FloatingActionButton: 浮动操作按钮,用于主要操作
+            3. MaterialButton: Material Design风格的按钮
+            
+            与当前方案区别:
+            - ImageButton: 主要用于显示图标,不支持文本
+            - FloatingActionButton: 圆形设计,通常用于主要操作
+            - MaterialButton: 提供更多Material Design特性,但依赖更大
+            
+            改动影响:
+            - 可能影响按钮的外观和交互行为
+            - 需要调整相关的样式和主题
+            - 可能需要更新点击事件处理逻辑 -->
+            <!-- 胶囊形按钮 -->
+            <Button
+                android:id="@+id/btn_capsule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="胶囊形"
+                app:cornerRadius="50dp"
+                android:backgroundTint="@color/purple_500" />
+
+            <!-- 圆角按钮 -->
+            <Button
+                android:id="@+id/btn_rounded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="圆角"
+                app:cornerRadius="8dp"
+                android:backgroundTint="@color/teal_200" />
+
+            <!-- 直角按钮 -->
+            <Button
+                android:id="@+id/btn_square"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="直角"
+                app:cornerRadius="0dp"
+                android:backgroundTint="@color/orange_500" />
+
+            <!-- FloatingActionButton标签的作用：
+            - 创建一个浮动操作按钮，通常用于主要或常用操作
+            - 符合Material Design规范，提供突出的视觉效果
+            
+            其他常用属性：
+            1. app:elevation：设置按钮阴影高度
+            2. app:rippleColor：设置点击涟漪效果颜色
+            3. android:clickable：控制按钮是否可点击
+            4. app:fabSize：预定义的按钮尺寸（normal、mini）
+            5. app:borderWidth：设置边框宽度
+            
+            属性作用和用法：
+            - app:elevation="6dp"：增加阴影效果，提高视觉层次
+            - app:rippleColor="#80FFFFFF"：设置半透明白色涟漪效果
+            - android:clickable="true"：确保按钮可点击
+            - app:fabSize="normal"：使用标准尺寸
+            - app:borderWidth="0dp"：移除边框
+            
+            优点：
+            - 视觉突出，易于识别主要操作
+            - 符合Material Design规范，提升用户体验
+            - 可自定义外观和行为
+            
+            缺点：
+            - 占用较大屏幕空间
+            - 过度使用可能导致界面混乱
+            
+            注意事项：
+            - 合理放置，避免遮挡其他重要内容
+            - 考虑不同屏幕尺寸的适配
+            - 注意按钮状态（正常、按下、禁用）的样式一致性
+            
+            替代方案：
+            1. 普通Button：适用于不需要特别突出的操作
+            2. ImageButton：适合只显示图标的场景
+            3. ExtendedFloatingActionButton：可显示文本的FAB
+            
+            与当前方案区别：
+            - Button：样式更加普通，不够突出
+            - ImageButton：缺少Material Design特性
+            - ExtendedFloatingActionButton：可显示文本，占用更多空间
+            
+            改动影响：
+            - 可能改变界面布局和视觉焦点
+            - 需要调整相关的样式和主题
+            - 可能需要更新点击事件处理逻辑 -->
+            <!-- 圆形按钮 -->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_dialog_info"
+                app:fabCustomSize="56dp"
+                app:maxImageSize="24dp"
+                app:backgroundTint="@color/red_500"
+                app:elevation="6dp"
+                app:rippleColor="#80FFFFFF"
+                android:clickable="true"
+                app:borderWidth="0dp" />
+
+            <!-- 椭圆形按钮 -->
+            <Button
+                android:id="@+id/btn_oval"
+                android:layout_width="80dp"
+                android:layout_height="56dp"
+                android:background="@drawable/oval_button"
+                app:backgroundTint="@color/green_500"
+                android:text="椭圆" />
+
+
+        </GridLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

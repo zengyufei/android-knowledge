@@ -1,4 +1,4 @@
-package com.zyf.demo.S03.debug_console;
+package com.zyf.demo.S04.all_btn;
 
 import android.os.Bundle
 import android.util.Log
@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Log.i("MainActivity", "onCreate");
 
-
         // 启用边缘到边缘显示，让应用内容扩展到屏幕边缘
         // 这就像是把商品摆到橱窗边缘，让路过的人更容易看到
         // 替代方案：WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -86,18 +85,79 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // setOnClickListener 是一个设置点击监听器的方法
-        // 它的作用是为视图（如按钮）添加一个点击事件处理程序
-        // 当用户点击该视图时，会触发这个监听器中的代码
-        val myButton = findViewById<Button>(R.id.myButton)
-        myButton.setOnClickListener { v ->
-            // 显示 Toast 提示
-            val toast = Toast.makeText(applicationContext, "这是一个提示信息", Toast.LENGTH_SHORT)
-            toast.show()
+        // 添加按钮点击和长按事件
+        setupButtonListeners()
+    }
 
-            // 使用 postDelayed 取消 Toast
-            // 设置 3 秒延迟
-            v.postDelayed({ toast.cancel() }, 3000)
+    private fun setupButtonListeners() {
+        // 定义需要添加监听器的按钮ID列表
+        val buttonIds = listOf(
+            R.id.btn_capsule, R.id.btn_rounded, R.id.btn_square,
+            R.id.btn_circle, R.id.btn_oval,
+            R.id.btn2_capsule, R.id.btn2_rounded, R.id.btn2_square,
+            R.id.btn2_circle, R.id.btn2_oval,
+            R.id.btn3_capsule, R.id.btn3_rounded, R.id.btn3_square,
+            R.id.btn3_circle, R.id.btn3_oval,
+            R.id.btn4_capsule, R.id.btn4_rounded, R.id.btn4_square,
+            R.id.btn4_circle, R.id.btn4_oval,
+            R.id.btn5_capsule, R.id.btn5_rounded, R.id.btn5_square,
+            R.id.btn5_circle, R.id.btn5_oval,
+            R.id.btn6_capsule,
+            R.id.btn7_checkbox,
+            R.id.btn7_left, R.id.btn7_right, R.id.btn7_rg, R.id.btn7_rb1, R.id.btn7_rb2
+        )
+
+        // 为每个按钮添加点击和长按监听器
+        buttonIds.forEach { buttonId ->
+            findViewById<View>(buttonId)?.apply {
+                setOnClickListener { showToast("${getButtonName(this)} 点击") }
+                setOnLongClickListener {
+                    showToast("${getButtonName(this)} 长按")
+                    true
+                }
+            }
         }
+    }
+
+    private fun getButtonName(view: View): String {
+        return when (view.id) {
+            R.id.btn_capsule -> "形状组 胶囊形按钮"
+            R.id.btn_rounded -> "形状组 圆角按钮"
+            R.id.btn_square -> "形状组 直角按钮"
+            R.id.btn_circle -> "形状组 圆形按钮"
+            R.id.btn_oval -> "形状组 椭圆形按钮"
+            R.id.btn2_capsule -> "空心组 胶囊形按钮"
+            R.id.btn2_rounded -> "空心组 圆角按钮"
+            R.id.btn2_square -> "空心组 直角按钮"
+            R.id.btn2_circle -> "空心组 圆形按钮"
+            R.id.btn2_oval -> "空心组 椭圆形按钮"
+            R.id.btn3_capsule -> "无边框组 胶囊形按钮"
+            R.id.btn3_rounded -> "无边框组 圆角按钮"
+            R.id.btn3_square -> "无边框组 直角按钮"
+            R.id.btn3_circle -> "无边框组 圆形按钮"
+            R.id.btn3_oval -> "无边框组 椭圆形按钮"
+            R.id.btn4_capsule -> "阴影组 胶囊形按钮"
+            R.id.btn4_rounded -> "阴影组 圆角按钮"
+            R.id.btn4_square -> "阴影组 直角按钮"
+            R.id.btn4_circle -> "阴影组 圆形按钮"
+            R.id.btn4_oval -> "阴影组 椭圆形按钮"
+            R.id.btn5_capsule -> "左侧图标组 胶囊形按钮"
+            R.id.btn5_rounded -> "左侧图标组 圆角按钮"
+            R.id.btn5_square -> "左侧图标组 直角按钮"
+            R.id.btn5_circle -> "左侧图标组 圆形按钮"
+            R.id.btn5_oval -> "左侧图标组 椭圆形按钮"
+            R.id.btn6_capsule -> "无文字组 胶囊形按钮"
+            R.id.btn7_checkbox -> "其他按钮组 复选框示例"
+            R.id.btn7_left -> "其他按钮组 左对齐按钮"
+            R.id.btn7_right -> "其他按钮组 右对齐按钮"
+            R.id.btn7_rg -> "其他按钮组 右对齐按钮"
+            R.id.btn7_rb1 -> "其他按钮组 右对齐按钮"
+            R.id.btn7_rb2 -> "其他按钮组 右对齐按钮"
+            else -> "未知按钮"
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

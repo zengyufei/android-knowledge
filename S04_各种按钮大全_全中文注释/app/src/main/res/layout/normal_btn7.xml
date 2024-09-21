@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="标准按钮-其他按钮组"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:useDefaultMargins="true">
+
+            <!-- 
+            com.google.android.material.button.MaterialButtonToggleGroup标签的作用:
+            - 创建一组互斥的按钮，类似于RadioGroup
+            - 提供Material Design风格的切换按钮组
+            
+            其他常用属性:
+            1. app:singleSelection: 是否只允许单选
+            2. app:selectionRequired: 是否必须选中一个按钮
+            3. app:checkedButton: 设置默认选中的按钮
+            4. app:buttonTextColor: 设置按钮文字颜色
+            5. app:buttonBackgroundTint: 设置按钮背景色
+            
+            属性作用和用法:
+            - singleSelection: 如"true"，只允许单选；"false"允许多选
+            - selectionRequired: 如"true"，必须选中一个按钮
+            - checkedButton: 如"@+id/btn_left"，设置默认选中的按钮
+            - buttonTextColor: 如"@color/button_text_color"，设置按钮文字颜色
+            - buttonBackgroundTint: 如"@color/button_background_tint"，设置按钮背景色
+            
+            优点:
+            - 符合Material Design规范，提升用户体验
+            - 提供丰富的自定义选项
+            - 支持单选和多选模式
+            
+            缺点:
+            - 依赖Material Components库
+            - 在低版本Android系统上可能需要额外适配
+            
+            注意事项:
+            - 确保项目依赖了最新版本的Material Components库
+            - 合理设置singleSelection和selectionRequired属性
+            - 注意按钮组内部按钮的样式一致性
+            
+            替代方案:
+            1. RadioGroup: 系统原生单选按钮组
+            2. LinearLayout + ToggleButton: 自定义切换按钮组
+            
+            与当前方案区别:
+            - RadioGroup: 只支持单选，样式较为简单
+            - LinearLayout + ToggleButton: 需要自行处理切换逻辑，缺乏Material Design特性
+            
+            改动影响:
+            - 可能需要调整相关的样式和主题
+            - 可能影响按钮组的外观和交互行为
+            - 需要确保Material Components库的正确集成
+            -->
+            <!-- 切换按钮 -->
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:checkedButton="@+id/btn7_left"
+                app:singleSelection="true"
+                app:selectionRequired="true">
+
+                
+                <!--
+                关于 style="@style/Widget.MaterialComponents.Button.OutlinedButton" 属性：
+                
+                1. 位置：这个样式定义在 Material Components 库中。
+                
+                2. 新手入门：
+                   - 首先确保项目依赖了 Material Components 库
+                   - 在 XML 布局文件中直接使用这个样式
+                   - 可以在 Android Studio 中按住 Ctrl 并点击样式名称来查看定义
+                
+                3. 获取相关信息：
+                   - 查阅 Material Design 官方文档
+                   - 阅读 Material Components for Android 的 GitHub 仓库
+                   - 使用 Android Studio 的代码补全功能探索其他样式
+                
+                4. 类似的样式：
+                   - Widget.MaterialComponents.Button：标准 Material 按钮
+                   - Widget.MaterialComponents.Button.TextButton：文本按钮
+                   - Widget.MaterialComponents.Button.UnelevatedButton：无阴影按钮
+                   - Widget.MaterialComponents.Button.Icon：带图标的按钮
+                -->
+                <Button
+                    android:id="@+id/btn7_left"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选项1" />
+
+                <Button
+                    android:id="@+id/btn7_right"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选项2" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:useDefaultMargins="true">
+
+                <!-- 
+                RadioGroup 标签的作用：
+                1. 用于组织一组单选按钮（RadioButton）
+                2. 确保组内只有一个选项被选中
+                3. 提供统一的监听器来处理选择变化
+
+                其他常用属性：
+                1. android:checkedButton：设置默认选中的按钮
+                2. android:layout_gravity：控制 RadioGroup 在父容器中的位置
+                3. android:padding：设置内边距
+                4. android:background：设置背景
+                5. android:divider：设置分隔线
+                6. android:showDividers：控制分隔线的显示位置
+
+                注意事项：
+                1. 确保每个 RadioButton 都有唯一的 id
+                2. 可以通过代码动态添加或删除 RadioButton
+                3. 可以嵌套使用 RadioGroup，但要小心避免逻辑混乱
+
+                替代方案：
+                1. ToggleButton：适用于开关类型的选择
+                2. Spinner：适用于下拉选择
+                3. MaterialButtonToggleGroup：Material Design 风格的切换按钮组
+
+                与当前方案的区别：
+                1. ToggleButton：外观不同，适合二选一场景
+                2. Spinner：节省空间，适合选项较多的情况
+                3. MaterialButtonToggleGroup：更现代的外观，支持多选
+
+                改动影响：
+                1. 布局变化：可能需要调整周围控件的位置
+                2. 样式变化：可能需要适配新的主题
+                3. 代码变化：监听器和处理逻辑可能需要相应调整
+                -->
+            <!-- 单选按钮 -->
+            <RadioGroup
+                android:id="@+id/btn7_rg"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkedButton="@+id/btn7_rb1"
+                android:layout_gravity="center_horizontal"
+                android:padding="8dp"
+                android:background="@android:color/transparent"
+                android:divider="@android:drawable/divider_horizontal_bright"
+                android:showDividers="middle">
+                <!-- 
+                RadioButton标签的作用:
+                1. 创建单选按钮控件
+                2. 通常与RadioGroup一起使用，实现互斥选择
+                
+                其他常用属性:
+                1. android:button: 自定义按钮样式
+                2. android:drawableLeft/Right/Top/Bottom: 设置文本周围的图标
+                3. android:textColor: 设置文本颜色
+                4. android:buttonTint: 设置按钮颜色
+                
+                属性作用和用法:
+                - button: 如"@drawable/custom_radio"，使用自定义样式
+                - drawableLeft: 如"@drawable/icon"，在文本左侧添加图标
+                - textColor: 如"@color/text_color"，设置文本颜色
+                - buttonTint: 如"@color/button_color"，设置按钮颜色
+                
+                优点:
+                - 简单易用，原生支持
+                - 可自定义外观
+                
+                缺点:
+                - 样式相对固定，不如自定义控件灵活
+                
+                注意事项:
+                - 确保id唯一
+                - 合理设置文本大小和按钮大小，保证可点击区域
+                
+                替代方案:
+                1. Switch: 开关型选择
+                2. ToggleButton: 状态切换按钮
+                3. MaterialButton: Material Design风格按钮
+                
+                与当前方案区别:
+                - Switch/ToggleButton: 更适合开关场景
+                - MaterialButton: 更现代的外观，支持更多自定义
+                
+                改动影响:
+                - 可能需要调整布局
+                - 可能需要修改相关的样式和主题
+                - 可能影响用户交互逻辑
+                -->
+                <RadioButton
+                    android:id="@+id/btn7_rb1"
+                    android:checked="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="单选1"
+                    android:textColor="@color/black"
+                    android:buttonTint="@color/purple_500"
+                    android:drawableLeft="@android:drawable/ic_menu_info_details"
+                    android:drawablePadding="8dp" />
+
+                <RadioButton
+                    android:id="@+id/btn7_rb2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="单选2" />
+            </RadioGroup>
+
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:useDefaultMargins="true">
+
+            <!-- 复选框 -->
+            <!-- 
+            CheckBox标签作用:
+            - 创建一个复选框控件，允许用户选择或取消选择某个选项
+            
+            其他常用属性:
+            - android:id: 设置唯一标识符
+            - android:checked: 设置初始选中状态
+            - android:text: 设置复选框旁边的文本
+            - android:textColor: 设置文本颜色
+            - android:buttonTint: 设置复选框颜色
+            - android:enabled: 设置是否可用
+            - android:onClick: 设置点击事件处理方法
+            
+            优点:
+            - 简单易用，适合多选场景
+            - 可自定义外观
+            
+            缺点:
+            - 样式相对固定，不如自定义控件灵活
+            
+            注意事项:
+            - 确保id唯一
+            - 合理设置文本大小，保证可点击区域
+            
+            替代方案:
+            1. Switch: 开关型选择
+            2. ToggleButton: 状态切换按钮
+            3. MaterialCheckBox: Material Design风格复选框
+            
+            与当前方案区别:
+            - Switch/ToggleButton: 更适合开关场景
+            - MaterialCheckBox: 更现代的外观，支持更多自定义
+            
+            改动影响:
+            - 可能需要调整布局
+            - 可能需要修改相关的样式和主题
+            - 可能影响用户交互逻辑
+            -->
+            <CheckBox
+                android:id="@+id/btn7_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="复选框示例"
+                android:checked="true"
+                android:textColor="@color/black"
+                android:enabled="true" />
+
+
+        </GridLayout>
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

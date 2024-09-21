@@ -47,7 +47,7 @@ dependencyResolutionManagement {
 
 // 设置根项目名称
 // 这个名称通常会显示在 IDE 中，建议使用有意义的名称
-rootProject.name = "S03_调试与控制台_全中文注释"
+rootProject.name = "S04_各种按钮大全_全中文注释"
 
 // 包含 app 模块
 // 这表示项目中有一个名为 "app" 的子模块

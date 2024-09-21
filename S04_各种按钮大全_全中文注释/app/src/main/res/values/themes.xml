@@ -55,7 +55,7 @@ resources 标签：
     -->    
     
     <!-- 基础应用主题 -->
-    <style name="Base.Theme.MyApplication" parent="Theme.Material3.DayNight">
+    <style name="Base.Theme.MyApplication" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- 
         parent 属性：
         - 作用：指定当前主题的父主题，从而继承父主题的所有属性和样式

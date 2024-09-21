@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <color name="purple_500">#FF6200EE</color>
+    <color name="teal_200">#2196F3</color>
+    <color name="orange_500">#FF9800</color>
+    <color name="red_500">#E00000</color>
+    <color name="green_500">#4CAF50</color>
+    <!-- 其他颜色定义 -->
 </resources>

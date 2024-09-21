@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 activity_main.xml 就像是一个商店的室内设计图。
 
 想象一下，这个XML文件就是一家新开张商店的布局设计：
@@ -49,126 +48,123 @@ tools:context
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-    <!-- Button 属性说明：
-    android:id
-    - 作用：为视图指定唯一标识符
-    - 可选项：任何有效的资源ID（如"@+id/my_button"）
-    - 推荐：使用描述性名称（如"@+id/btnLinearLayout"）
-    - 原因：便于在代码和其他视图中引用
-    - 默认值：无，需要手动指定
-    - 默认原因：允许开发者根据需求自定义ID
-
-    android:layout_width, android:layout_height
-    - 作用：设置视图的宽度和高度
-    - 可选项：wrap_content, match_parent, 具体尺寸（如"200dp"）
-    - 推荐：wrap_content（当前选项）
-    - 原因：允许文本自适应内容大小，避免不必要的空间浪费
-    - 默认值：wrap_content
-    - 默认原因：最适合单个文本显示的需求，灵活且节省空间
-
-    android:text
-    - 作用：设置显示的文本内容
-    - 可选项：直接文本（如"Hello World!"），字符串资源（如"@string/hello_world"）
-    - 推荐：使用字符串资源（如"@string/hello_world"）
-    - 原因：便于本地化和统一管理文本内容
-    - 默认值：无
-    - 默认原因：允许开发者根据需求设置文本内容
-
-    app:layout_constraint[Start/End/Top/Bottom]_to[Start/End/Top/Bottom]Of
-    - 作用：在ConstraintLayout中定位这个TextView
-    - 可选项：parent, 其他视图的ID
-    - 推荐：当前设置（居中显示）
-    - 原因：在ConstraintLayout中实现居中效果
-    - 默认值：无
-    - 默认原因：ConstraintLayout要求明确设置约束
-
+    <!-- NestedScrollView标签的作用：
+    - 提供可滚动的容器，支持嵌套滚动
+    - 适用于复杂布局和长内容的显示
+    
     其他常用属性：
+    1. android:fillViewport="true"：内容不足时也填满父容器
+    2. android:scrollbars="vertical"：显示垂直滚动条
+    3. android:fadeScrollbars="false"：始终显示滚动条
+    4. android:scrollbarStyle="outsideOverlay"：滚动条样式
+    5. app:layout_behavior="@string/appbar_scrolling_view_behavior"：与AppBarLayout协调
+    
+    属性作用和用法：
+    - fillViewport：true时，即使内容不足也会填满父容器
+    - scrollbars：控制滚动条显示方向，如"none"、"horizontal"
+    - fadeScrollbars：false时滚动条始终可见
+    - scrollbarStyle：定义滚动条位置和行为
+    - layout_behavior：实现与其他组件的滚动协调
+    
+    优点：
+    - 支持嵌套滚动，提高用户体验
+    - 可处理复杂的滚动冲突
+    - 与Material Design组件良好兼容
+    
+    缺点：
+    - 相比普通ScrollView，性能略低
+    - 使用不当可能导致过度嵌套，影响性能
+    
+    注意事项：
+    - 避免在NestedScrollView中使用大型列表
+    - 合理使用fillViewport属性
+    - 注意处理滚动状态和位置
+    
+    替代方案：
+    1. ScrollView：简单垂直滚动
+    2. HorizontalScrollView：水平滚动
+    3. RecyclerView：高效处理大量数据
+    
+    与当前方案区别：
+    - ScrollView：不支持嵌套滚动，功能较简单
+    - HorizontalScrollView：仅支持水平方向滚动
+    - RecyclerView：更适合大量重复性内容，但配置复杂
+    
+    改动影响：
+    - 可能影响滚动行为和性能
+    - 需要调整子视图的布局参数
+    - 可能需要更新相关的滚动监听器 -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false"
+        android:scrollbarStyle="outsideOverlay"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    android:textSize
-    - 作用：设置文本大小
-    - 可选项：具体尺寸（如"16sp"）
-    - 推荐：16sp（标准文本大小）
-    - 默认值：14sp
-    - 默认原因：Android系统的默认文本大小
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- include标签的作用：
+            - 将其他布局文件嵌入当前布局，实现布局复用
+            - 减少代码重复，提高维护性
+            
+            其他属性：
+            1. android:id：为include的布局指定ID
+            2. android:layout_*：覆盖被包含布局的根视图布局参数
+            3. android:visibility：控制包含的布局可见性
+            
+            属性作用和用法：
+            - android:id="@+id/custom_id"：为包含的布局指定新ID
+            - android:layout_width="match_parent"：覆盖被包含布局的宽度
+            - android:visibility="gone"：初始隐藏被包含的布局
+            
+            优点：
+            - 提高代码复用性
+            - 简化布局结构
+            - 便于维护和更新
+            
+            缺点：
+            - 可能增加布局层级，影响性能
+            - 不适合频繁动态修改的布局
+            
+            注意事项：
+            - 被包含布局的根元素属性可能被覆盖
+            - 避免循环包含，造成栈溢出
+            
+            替代方案：
+            1. <merge>标签：减少视图层级
+            2. 自定义View：更灵活，性能更好
+            3. ViewStub：延迟加载，适合不常用的复杂布局
+            
+            与当前方案区别：
+            - <merge>：减少一层视图嵌套，但使用场景受限
+            - 自定义View：更适合复杂交互，但开发成本高
+            - ViewStub：按需加载，节省内存，但不支持<merge>
+            
+            改动影响：
+            - 布局结构变化可能影响其他引用此布局的地方
+            - 性能可能略有提升或下降，取决于具体实现 -->
+            <include layout="@layout/normal_btn" />
 
-    android:textColor
-    - 作用：设置文本颜色
-    - 可选项：颜色值（如"#000000"），颜色资源（如"@color/black"）
-    - 推荐：使用颜色资源
-    - 默认值：应用主题默认文本颜色
-    - 默认原因：保持与应用整体风格一致
+            <include layout="@layout/normal_btn2" />
 
-    android:fontFamily
-    - 作用：设置字体
-    - 可选项：系统字体（如"sans-serif"），自定义字体（如"@font/my_font"）
-    - 推荐：使用系统字体（如"sans-serif"）
-    - 默认值：系统默认字体
-    - 默认原因：兼容性好，无需额外资源
+            <include layout="@layout/normal_btn3" />
 
-    android:gravity
-    - 作用：设置文本在TextView内部的对齐方式
-    - 可选项：center, left, right, top, bottom等
-    - 用法：android:gravity="center"
-    - 优点：可以精确控制文本位置
-    - 缺点：可能与layout_gravity混淆
-    - 注意：与layout_gravity的区别
-    - 替代方案：使用padding调整文本位置
-    - 区别：gravity影响内容，padding影响整个视图
-    - 改动影响：改变文本在TextView内的显示位置
+            <include layout="@layout/normal_btn4" />
 
-    android:ellipsize
-    - 作用：设置文本过长时的省略方式
-    - 可选项：end, start, middle, marquee
-    - 用法：android:ellipsize="end"
-    - 优点：优雅处理长文本
-    - 缺点：可能隐藏重要信息
-    - 注意：使用marquee时需要额外设置
-    - 替代方案：使用ScrollView包裹TextView
-    - 区别：ScrollView允许滚动查看全文
-    - 改动影响：改变长文本的显示方式
+            <include layout="@layout/normal_btn5" />
+            
+            <include layout="@layout/normal_btn6" />
 
-    android:maxLines
-    - 作用：限制TextView显示的最大行数
-    - 可选项：整数值
-    - 用法：android:maxLines="2"
-    - 优点：控制文本占用的垂直空间
-    - 缺点：可能截断文本
-    - 注意：与ellipsize配合使用效果更佳
-    - 替代方案：使用固定高度的TextView
-    - 区别：maxLines更灵活，固定高度可能导致文本被切割
-    - 改动影响：限制文本的显示行数
+            <include layout="@layout/normal_btn7" />
 
-    android:textStyle
-    - 作用：设置文本样式
-    - 可选项：normal, bold, italic
-    - 用法：android:textStyle="bold|italic"
-    - 优点：快速设置文本外观
-    - 缺点：样式选项有限
-    - 注意：可以组合使用
-    - 替代方案：使用自定义字体
-    - 区别：自定义字体提供更多样式选择
-    - 改动影响：改变文本的视觉效果
 
-    android:background
-    - 作用：设置TextView的背景
-    - 可选项：颜色值，drawable资源
-    - 用法：android:background="@drawable/my_background"
-    - 优点：可以创建复杂的背景效果
-    - 缺点：可能影响性能
-    - 注意：大型背景可能导致过度绘制
-    - 替代方案：使用父布局的background
-    - 区别：直接设置更精确��但可能增加布局复杂度
-    - 改动影响：改变TextView的视觉外观
--->
-    <Button
-        android:id="@+id/myButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="点击我出提示"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp"/>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

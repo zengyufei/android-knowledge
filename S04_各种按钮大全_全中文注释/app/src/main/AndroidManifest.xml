@@ -1,170 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-AndroidManifest.xml 就像是一个应用程序的身份证和说明书。
-
-想象一下，这个文件就是一家新开张商店的营业执照和店铺说明：
-1. 商店名称（package属性）：告诉顾客这是哪家店。
-2. 营业许可（权限申请）：列出店铺可以经营的业务。
-3. 店铺布局（组件声明）：描述店铺里有哪些部门。
-4. 店铺招牌（应用图标和标签）：让顾客一眼就能认出这家店。
-
-生命周期：
-- 使用时机：顾客（Android系统）在店铺开张（应用安装）和每次光顾（应用启动）时都会查看。
-- 查看顺序：是了解这家店铺的第一步。
-
-文件位置：
-- 存放位置：位于项目的 app/src/main/AndroidManifest.xml 文件中。
-- 使用方式：Android系统自动读取，不需要开发者手动调用。
--->
-<!-- manifest 是整个文件的根元素，就像是整个营业执照的底板 -->
-<!-- xmlns 属性定义了使用的XML命名空间，就像是规定了文件的书写语言 -->
-<!-- 
-xmlns:android 属性：
-- 作用：定义Android命名空间
-- 可选值：通常为 "http://schemas.android.com/apk/res/android"
-- 含义：告诉系统这是一个Android应用的配置文件
-- 用法：在根元素中声明，之后的元素可以使用android:前缀
-- 优点：标准化配置，系统能正确解析
-- 缺点：无
-- 注意：必须正确拼写，否则整个文件可能无法解析
-- 替代方案：无实际可用的替代方案
-- 推荐：强烈推荐使用标准命名空间
-- 默认值：无默认值，必须明确声明
-
-xmlns:tools 属性：
-- 作用：定义tools命名空间，用于开发工具
-- 可选值：通常为 "http://schemas.android.com/tools"
-- 含义：提供额外的开发时信息，不影响运行时行为
-- 用法：在根元素中声明，用于指定一些编译时行为
-- 优点：可以提供更多开发时信息和控制
-- 缺点：可能增加文件复杂度
-- 注意：这些属性不会打包到最终APK中
-- 替代方案：可以不使用，但会失去一些开发便利
-- 推荐：建议使用，特别是在需要指定目标SDK等情况下
-- 默认值：无默认值，可以选择性使用
--->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- application 标签包含了应用的主要配置，就像是详细的店铺说明 -->
-    <!-- 
-    android:allowBackup 属性：
-    - 作用：控制应用是否可以参与数据备份和恢复
-    - 可选值：true（允许备份），false（禁止备份）
-    - 含义：决定用户更换设备时是否可以恢复应用数据
-    - 用法：在application标签中设置
-    - 优点（true）：用户可以在更换设备时恢复数据
-    - 缺点（true）：可能导致敏感数据被备份
-    - 注意：设置为false可能影响用户体验
-    - 替代方案：使用更细粒度的备份策略，如@xml/backup_rules
-    - 推荐：根据应用性质决定，涉及敏感数据时推荐false
-    - 默认值：true
-    - 默认原因：提供更好的用户体验
-
-    android:dataExtractionRules 属性：
-    - 作用：指定数据提取规则文件
-    - 可选值：指向XML资源文件，如@xml/data_extraction_rules
-    - 含义：定义哪些数据可以被提取用于备份
-    - 用法：在Android 12及以上版本使用
-    - 优点：提供更精细的数据备份控制
-    - 缺点：需要额外配置文件
-    - 注意：只在较新的Android版本中有效
-    - 替代方案：在低版本中使用fullBackupContent
-    - 推荐：在支持Android 12及以上的应用中使用
-    - 默认值：无
-    - 原因：需要开发者明确指定备份策略
-
-    android:fullBackupContent 属性：
-    - 作用：指定完整备份内容
-    - 可选值：指向XML资源文件，如@xml/backup_rules
-    - 含义：详细定义应用数据的备份规则
-    - 用法：主要用于Android 12以下版本
-    - 优点：可以精确控制备份内容
-    - 缺点：配置相对复杂
-    - 注意：在新版本中被dataExtractionRules取代
-    - 替代方案：在高版本中使用dataExtractionRules
-    - 推荐：在支持旧版本Android的应用中使用
-    - 默认值：无
-    - 原因：需要开发者明确指定备份策略
-
-    android:icon 属性：
-    - 作用：设置应用图标
-    - 可选值：指向drawable或mipmap资源，如@mipmap/ic_launcher
-    - 含义：定义应用在启动器中显示的图标
-    - 用法：指定一个图像资源
-    - 优点：为应用提供视觉识别
-    - 缺点：无明显缺点
-    - 注意：应提供不同分辨率的图标
-    - 替代方案：可以动态更改图标，但需要额外代码
-    - 推荐：强烈建议设置，是应用的视觉标识
-    - 默认值：无
-    - 原因：应用图标是必要的，需要开发者明确指定
-
-    android:label 属性：
-    - 作用：设置应用名称
-    - 可选值：字符串或字符串资源引用，如@string/app_name
-    - 含义：定义应用在用户设备上显示的名称
-    - 用法：通常引用字符串资源以支持多语言
-    - 优点：为用户提供应用的文字标识
-    - 缺点：无明显缺点
-    - 注意：应简洁明了，易于识别
-    - 替代方案：无实际可用的替代方案
-    - 推荐：必须设置，是应用的文字标识
-    - 默认值：无
-    - 原因：应用名称是必要的，需要开发者明确指定
-
-    android:roundIcon 属性：
-    - 作用：设置圆形应用图标
-    - 可选值：指向drawable或mipmap资源，如@mipmap/ic_launcher_round
-    - 含义：为支持圆形图标的启动器提供专门的圆形图标
-    - 用法：指定一个圆形图像资源
-    - 优点：在某些设备上提供更好的视觉效果
-    - 缺点：需要额外的图标设计
-    - 注意：不是所有启动器都支持圆形图标
-    - 替代方案：可以只使用常规图标（android:icon）
-    - 推荐：建议设置，以适应不同的启动器样式
-    - 默认值：无
-    - 原因：是可选功能，由开发者决定是否提供
-
-    android:supportsRtl 属性：
-    - 作用：声明应用是否支持从右到左（RTL）布局
-    - 可选值：true（支持），false（不支持）
-    - 含义：指示应用是否适配了RTL布局（如阿拉伯语）
-    - 用法：设置为true时，系统会在RTL语言环境下自动调整布局
-    - 优点：提高应用的国际化水平
-    - 缺点：可能需要额外的布局适配工作
-    - 注意：设置为true后，应确保所有布局都正确支持RTL
-    - 替代方案：手动处理RTL布局，但工作量大
-    - 推荐：建议设置为true，以支持更广泛的用户群
-    - 默认值：false
-    - 原因：默认不启用，避免未适配的应用出现布局问题
-
-    android:theme 属性：
-    - 作用：设置应用的默认主题
-    - 可选值：指向style资源，如@style/Theme.MyApplication
-    - 含义：定义应用的整体视觉风格
-    - 用法：指定一个预定义或自定义的主题
-    - 优点：统一应用的视觉风格，简化布局文件
-    - 缺点：如果主题设置不当，可能影响应用的整体外观
-    - 注意：可以在各个Activity中覆盖此设置
-    - 替代方案：在每个Activity中单独设置主题
-    - 推荐：强烈建议设置，用于定义应用的基础视觉风格
-    - 默认值：取决于目标SDK版本的默认主题
-    - 原因：提供一个基础主题，确保应用有一致的外观
-
-    tools:targetApi 属性：
-    - 作用：指定应用的目标API级别
-    - 可选值：整数值，表示Android API级别，如"31"
-    - 含义：告诉开发工具应用针对的Android版本
-    - 用法：在application标签中设置
-    - 优点：抑制针对较新API的警告，改善开发体验
-    - 缺点：可能掩盖实际的兼容性问题
-    - 注意：不影响实际运行，仅用于开发阶段
-    - 替代方案：在build.gradle中设置targetSdkVersion
-    - 推荐：建议使用，特别是当使用了较新的API特性时
-    - 默认值：无
-    - 原因：作为开发工具属性，需要明确指定
-    -->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -175,8 +12,7 @@ xmlns:tools 属性：
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
-
-        <!-- 
+        <!--
         activity 标签：声明应用的一个页面，就像是店铺中的一个部门
         
         android:name 属性：
@@ -249,7 +85,8 @@ xmlns:tools 属性：
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
-            <!-- 
+
+            <!--
             intent-filter 标签：
             - 作用：定义Activity、Service或BroadcastReceiver可以响应的Intent
             - 含义：指定组件可以处理的操作和数据类型
@@ -284,8 +121,11 @@ xmlns:tools 属性：
             - 替代方案：手动处理深层链接
             - 改动影响：影响应用如何处理来自网页的链接
             -->
-            <intent-filter android:priority="100" android:autoVerify="true">
-                <!-- 
+            <intent-filter
+                android:autoVerify="true"
+                android:priority="100">
+
+                <!--
                 action 标签：
                 - 作用：指定Intent可以执行的操作
                 - 可选值：预定义的系统操作（如MAIN）或自定义操作
@@ -301,7 +141,7 @@ xmlns:tools 属性：
                 -->
                 <action android:name="android.intent.action.MAIN" />
 
-                <!-- 
+                <!--
                 category 标签：
                 - 作用：为Intent提供附加信息
                 - 可选值：预定义类别（如LAUNCHER）或自定义类别
@@ -317,7 +157,7 @@ xmlns:tools 属性：
                 -->
                 <category android:name="android.intent.category.LAUNCHER" />
 
-                <!-- 
+                <!--
                 data 标签：
                 - 作用：指定Intent可以处理的数据类型
                 - 含义：定义组件可以处理的URI结构和MIME类型
@@ -331,8 +171,6 @@ xmlns:tools 属性：
                 <!-- <data android:scheme="https" android:host="example.com" android:pathPrefix="/page" /> -->
             </intent-filter>
         </activity>
-
-
     </application>
 
 </manifest>

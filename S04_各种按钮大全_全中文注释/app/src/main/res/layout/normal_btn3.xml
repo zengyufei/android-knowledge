@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="标准按钮-无边框组"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:useDefaultMargins="true">
+
+
+            <!-- 胶囊形按钮 -->
+            <Button
+                android:id="@+id/btn3_capsule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="胶囊形"
+                app:cornerRadius="50dp"
+                style="@style/Widget.MaterialComponents.Button.TextButton" />
+
+            <!-- 圆角按钮 -->
+            <Button
+                android:id="@+id/btn3_rounded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="圆角"
+                app:cornerRadius="8dp"
+                style="@style/Widget.MaterialComponents.Button.TextButton" />
+
+            <!-- 直角按钮 -->
+            <Button
+                android:id="@+id/btn3_square"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="直角"
+                app:cornerRadius="0dp"
+                style="@style/Widget.MaterialComponents.Button.TextButton" />
+
+            <!-- 圆形按钮 -->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn3_circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_dialog_info"
+                app:fabCustomSize="56dp"
+                app:maxImageSize="24dp"
+                style="@style/Widget.MaterialComponents.FloatingActionButton" />
+
+            <!-- 椭圆形按钮 -->
+            <Button
+                android:id="@+id/btn3_oval"
+                android:layout_width="80dp"
+                android:layout_height="56dp"
+                android:text="椭圆"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                app:cornerRadius="28dp"/>
+
+        </GridLayout>
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

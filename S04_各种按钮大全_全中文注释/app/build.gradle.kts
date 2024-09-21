@@ -21,7 +21,7 @@ android {
     // 设置应用程序的包名
     // 作用：唯一标识应用程序
     // 注意：更改可能导致应用被视为新应用
-    namespace = "com.zyf.demo.S03.debug_console"
+    namespace = "com.zyf.demo.S04.all_btn"
 
     // 设置编译 SDK 版本
     // 作用：指定用于编译应用的 Android SDK 版本
@@ -32,7 +32,7 @@ android {
         // 设置应用程序 ID
         // 作用：在 Google Play 商店中唯一标识应用
         // 注意：更改会导致应用被视为新应用
-        applicationId = "com.zyf.demo.S03.debug_console"
+        applicationId = "com.zyf.demo.S04.all_btn"
 
         // 设置最低支持的 SDK 版本
         // 作用：指定应用可以运行的最低 Android 版本

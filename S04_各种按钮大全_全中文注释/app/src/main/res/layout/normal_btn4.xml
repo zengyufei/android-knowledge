@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="标准按钮-阴影组"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:useDefaultMargins="true">
+
+            <!-- 胶囊形按钮 -->
+            <Button
+                android:id="@+id/btn4_capsule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="胶囊形"
+                app:cornerRadius="50dp"
+                android:backgroundTint="@color/purple_500"
+                android:elevation="4dp"
+                android:stateListAnimator="@null" />
+
+            <!-- 圆角按钮 -->
+            <Button
+                android:id="@+id/btn4_rounded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="圆角"
+                app:cornerRadius="8dp"
+                android:backgroundTint="@color/teal_200"
+                android:elevation="4dp"
+                android:stateListAnimator="@null" />
+
+            <!-- 直角按钮 -->
+            <Button
+                android:id="@+id/btn4_square"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="直角"
+                app:cornerRadius="0dp"
+                android:backgroundTint="@color/orange_500"
+                android:elevation="4dp"
+                android:stateListAnimator="@null" />
+
+            <!-- 圆形按钮 -->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn4_circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_dialog_info"
+                app:fabCustomSize="56dp"
+                app:maxImageSize="24dp"
+                app:backgroundTint="@color/red_500"
+                app:elevation="6dp" />
+
+            <!-- 椭圆形按钮 -->
+            <Button
+                android:id="@+id/btn4_oval"
+                android:layout_width="80dp"
+                android:layout_height="56dp"
+                android:background="@drawable/oval_button"
+                android:text="椭圆"
+                android:elevation="4dp"
+                android:stateListAnimator="@null" />
+
+        </GridLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
