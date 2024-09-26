@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">S06 set_text_size</string>
+    <string name="helloworld">你好，世界！</string>
+</resources>
