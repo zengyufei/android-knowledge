@@ -24,6 +24,7 @@ jobs:
     - name: Use variable from environment
       run: |
         echo "文件夹名:$dir_name"
+        echo "apk文件名:$apk_name"
         
     # Step 1: Checkout the repository
     - name: Checkout Repository
@@ -91,8 +92,8 @@ jobs:
       if: success()
       uses: actions/upload-artifact@v3
       with:
-        name: ${apk_name}.apk
-        path: ${dir_name}/app/build/outputs/apk/release/${apk_name}.apk
+        name: ${{env.apk_name}}.apk
+        path: ${{env.dir_name}}/app/build/outputs/apk/release/${{env.apk_name}}.apk
         if-no-files-found: warn
 
 
@@ -103,5 +104,5 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: ${{env.dir_name}}/app/build/outputs/apk/release/${{env.apk_name}}.apk
-        asset_name: S01_Hello_World.apk
+        asset_name: ${{env.apk_name}}.apk
         tag: ${{ github.ref }}
