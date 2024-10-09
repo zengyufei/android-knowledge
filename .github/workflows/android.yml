@@ -61,31 +61,19 @@ jobs:
         cd $dir_name
         chmod +x gradlew
 
-    # Step 5: Create a Keystore File
-    - name: Create Keystore File
-      run: |
-        echo "begin"
-        echo "${{ secrets.NOTIFY_ME_KEYSTORE_BASE64 }}"
-        mkdir -p app
-        echo "$NOTIFY_ME_KEYSTORE_BASE64"
-        echo "$NOTIFY_ME_KEYSTORE_BASE64" | base64 -di > ${{ github.workspace }}/app/keystore.jks
-        echo ${{ github.workspace }}/app/keystore.jks
-        echo "end"
-      env:
-        NOTIFY_ME_KEYSTORE_BASE64: ${{ secrets.NOTIFY_ME_KEYSTORE_BASE64 }}
         
 
     # Step 6: Build the APK
     - name: Build APK
       run: |
         cd $dir_name
-        ./gradlew assembleRelease -PkeystorePath=${{ github.workspace }}/app/keystore.jks
+        ./gradlew assembleRelease -PkeystorePath=${{ github.workspace }}/keystore.jks
       env:
         JAVA_HOME: /opt/hostedtoolcache/Java_Dragonwell_jdk/17.0.12-7/x64
-        NOTIFY_ME_KEYSTORE_PATH: ${{ github.workspace }}/app/keystore.jks
-        NOTIFY_ME_KEY_ALIAS: ${{ secrets.NOTIFY_ME_KEY_ALIAS }}
-        NOTIFY_ME_KEY_PASSWORD: ${{ secrets.NOTIFY_ME_KEY_PASSWORD }}
-        NOTIFY_ME_KEYSTORE_PASSWORD: ${{ secrets.NOTIFY_ME_KEYSTORE_PASSWORD }}
+        NOTIFY_ME_KEYSTORE_PATH: ${{ github.workspace }}/keystore.jks
+        NOTIFY_ME_KEY_ALIAS: "key0"
+        NOTIFY_ME_KEY_PASSWORD: "123456"
+        NOTIFY_ME_KEYSTORE_PASSWORD: "123456"
 
     # Step 7: Find the generated APK and rename it with the tag name
     - name: Find and Rename APK
