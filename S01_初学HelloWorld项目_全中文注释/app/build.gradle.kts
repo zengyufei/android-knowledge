@@ -61,7 +61,7 @@ android {
     }
     
     signingConfigs {
-        release {
+        create("release") {
             val keystorePath = System.getenv("NOTIFY_ME_KEYSTORE_PATH")
             if (keystorePath.isNullOrEmpty()) {
                 throw GradleException("NOTIFY_ME_KEYSTORE_PATH environment variable is not set")
