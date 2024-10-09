@@ -82,7 +82,7 @@ android {
             // 推荐：在正式发布时启用
             isMinifyEnabled = false
             
-            signingConfig signingConfigs.release
+            signingConfig = signingConfigs.getByName("release")
 
             // 指定混淆规则文件
             // 作用：定义代码混淆的规则
