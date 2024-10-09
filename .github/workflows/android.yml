@@ -65,7 +65,9 @@ jobs:
     - name: Create Keystore File
       run: |
         mkdir -p app
+        echo $NOTIFY_ME_KEYSTORE_BASE64
         echo "$NOTIFY_ME_KEYSTORE_BASE64" | base64 -di > ${{ github.workspace }}/app/keystore.jks
+        echo ${{ github.workspace }}/app/keystore.jks
       env:
         NOTIFY_ME_KEYSTORE_BASE64: ${{ secrets.NOTIFY_ME_KEYSTORE_BASE64 }}
         
@@ -74,7 +76,6 @@ jobs:
     - name: Build APK
       run: |
         cd $dir_name
-        cat ${{ github.workspace }}/app/keystore.jks
         ./gradlew assembleRelease -PkeystorePath=${{ github.workspace }}/app/keystore.jks
       env:
         JAVA_HOME: /opt/hostedtoolcache/Java_Dragonwell_jdk/17.0.12-7/x64
