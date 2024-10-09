@@ -59,6 +59,21 @@ android {
         // 作用：指定用于运行仪器测试的类
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    
+    signingConfigs {
+        create("release") {
+            // These environment variables must be provided by the GitHub Action or your local environment
+            val keystorePath = System.getenv("NOTIFY_ME_KEYSTORE_PATH")
+            if (keystorePath.isNullOrEmpty()) {
+                throw GradleException("NOTIFY_ME_KEYSTORE_PATH environment variable is not set")
+            }
+
+            keyAlias = System.getenv("NOTIFY_ME_KEY_ALIAS")
+            keyPassword = System.getenv("NOTIFY_ME_KEY_PASSWORD")
+            storeFile = file(keystorePath)
+            storePassword = System.getenv("NOTIFY_ME_KEYSTORE_PASSWORD")
+        }
+    }
 
     buildTypes {
         release {
@@ -75,6 +90,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
