@@ -74,7 +74,7 @@ jobs:
     - name: Build APK
       run: |
         cd $dir_name
-        ls ${{ github.workspace }}/app
+        cat ${{ github.workspace }}/app/keystore.jks
         ./gradlew assembleRelease -PkeystorePath=${{ github.workspace }}/app/keystore.jks
       env:
         JAVA_HOME: /opt/hostedtoolcache/Java_Dragonwell_jdk/17.0.12-7/x64
