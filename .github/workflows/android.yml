@@ -14,7 +14,7 @@ jobs:
   build:
     name: S01_Hello_World Build APK
     runs-on: ubuntu-latest
-     env:
+    env:
       dir_name: "S01_初学HelloWorld项目_全中文注释"
       apk_name: "S01_Hello_World"
 
