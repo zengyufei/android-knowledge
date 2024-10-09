@@ -4,7 +4,7 @@ on:
   workflow_dispatch: {}
   push:
     tags:
-      - '*'
+      - 'v*.*.*'
 
 permissions:
   contents: write
@@ -25,6 +25,13 @@ jobs:
       run: |
         echo "文件夹名:$dir_name"
         echo "apk文件名:$apk_name"
+        
+    - name: Get branch name
+      id: branch-name
+      uses: tj-actions/branch-names@v5.1
+    - name: Print branch    
+      run: |
+        echo "Running on default: ${{ steps.branch-name.outputs.current_branch }}"
         
     # Step 1: Checkout the repository
     - name: Checkout Repository
@@ -67,6 +74,7 @@ jobs:
     - name: Build APK
       run: |
         cd $dir_name
+        ls ${{ github.workspace }}/app
         ./gradlew assembleRelease -PkeystorePath=${{ github.workspace }}/app/keystore.jks
       env:
         JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.12-7/x64
