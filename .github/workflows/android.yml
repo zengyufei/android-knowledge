@@ -3,7 +3,7 @@ name: Android CI
 on:
   push:
     tags:
-      - 'release'
+      - 'release-*'
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
