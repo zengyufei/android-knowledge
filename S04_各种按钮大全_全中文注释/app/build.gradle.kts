@@ -58,6 +58,20 @@ android {
         // 作用：指定用于运行仪器测试的类
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    
+    signingConfigs {
+        create("release") {
+            val keystorePath = System.getenv("NOTIFY_ME_KEYSTORE_PATH")
+            if (keystorePath.isNullOrEmpty()) {
+                throw GradleException("NOTIFY_ME_KEYSTORE_PATH environment variable is not set")
+            }
+
+            keyAlias = System.getenv("NOTIFY_ME_KEY_ALIAS")
+            keyPassword = System.getenv("NOTIFY_ME_KEY_PASSWORD")
+            storeFile = file(keystorePath)
+            storePassword = System.getenv("NOTIFY_ME_KEYSTORE_PASSWORD")
+        }
+    }
 
     buildTypes {
         release {
@@ -66,6 +80,8 @@ android {
             // 缺点：可能导致某些第三方库出问题，需要额外配置
             // 推荐：在正式发布时启用
             isMinifyEnabled = false
+            
+            signingConfig = signingConfigs.getByName("release")
 
             // 指定混淆规则文件
             // 作用：定义代码混淆的规则
