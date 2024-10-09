@@ -39,7 +39,7 @@ jobs:
             
     # Step 4: Grant execute permission for Gradlew
     - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      run: cd S01_初学HelloWorld项目_全中文注释 && chmod +x gradlew
 
     # Step 5: Create a Keystore File
     - name: Create Keystore File
@@ -52,7 +52,7 @@ jobs:
 
     # Step 6: Build the APK
     - name: Build APK
-      run: ./gradlew assembleRelease -PkeystorePath=${{ github.workspace }}/app/keystore.jks
+      run: ./S01_初学HelloWorld项目_全中文注释/gradlew assembleRelease -PkeystorePath=${{ github.workspace }}/app/keystore.jks
       env:
         JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.12-7/x64
         NOTIFY_ME_KEYSTORE_PATH: ${{ github.workspace }}/app/keystore.jks
