@@ -3,10 +3,8 @@ name: Android CI
 on:
   workflow_dispatch: {}
   push:
-    branches:
-      - 'v-*'
     tags:
-      - 'v-*'
+      - '*'
 
 permissions:
   contents: write
