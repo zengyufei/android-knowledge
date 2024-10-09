@@ -61,8 +61,7 @@ android {
     }
     
     signingConfigs {
-        create("release") {
-            // These environment variables must be provided by the GitHub Action or your local environment
+        release {
             val keystorePath = System.getenv("NOTIFY_ME_KEYSTORE_PATH")
             if (keystorePath.isNullOrEmpty()) {
                 throw GradleException("NOTIFY_ME_KEYSTORE_PATH environment variable is not set")
@@ -82,6 +81,8 @@ android {
             // 缺点：可能导致某些第三方库出问题，需要额外配置
             // 推荐：在正式发布时启用
             isMinifyEnabled = false
+            
+            signingConfig signingConfigs.release
 
             // 指定混淆规则文件
             // 作用：定义代码混淆的规则
@@ -91,7 +92,6 @@ android {
                 "proguard-rules.pro"
             )
             
-            signingConfig = signingConfigs.getByName("release")
         }
     }
 
