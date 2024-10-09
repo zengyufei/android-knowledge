@@ -6,25 +6,26 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  contents: write
+  actions: read
+  
 jobs:
   build:
     name: Build APK
-
     runs-on: ubuntu-latest
 
     steps:
-    
     # Step 1: Checkout the repository
     - name: Checkout Repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
       
     # Step 2: Set up JDK 17
     - name: set up JDK 17
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v3
       with:
-        java-version: '17'
         distribution: 'zulu'
-        cache: gradle
+        java-version: '17'
         
     # Step 3: Cache Gradle dependencies
     - name: Cache Gradle dependencies
@@ -52,7 +53,7 @@ jobs:
 
     # Step 6: Build the APK
     - name: Build APK
-      run: ./S01_初学HelloWorld项目_全中文注释/gradlew assembleRelease -PkeystorePath=${{ github.workspace }}/app/keystore.jks
+      run: cd S01_初学HelloWorld项目_全中文注释 && ./gradlew assembleRelease -PkeystorePath=${{ github.workspace }}/app/keystore.jks
       env:
         JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.12-7/x64
         NOTIFY_ME_KEYSTORE_PATH: ${{ github.workspace }}/app/keystore.jks
