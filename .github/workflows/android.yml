@@ -79,5 +79,27 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: S01_初学HelloWorld项目_全中文注释.apk
-        path: app/build/outputs/apk/release/S01_初学HelloWorld项目_全中文注释.apk
+        path: S01_初学HelloWorld项目_全中文注释/app/build/outputs/apk/release/S01_初学HelloWorld项目_全中文注释.apk
         if-no-files-found: warn
+
+    # Step 9: Create GitHub Release and upload the APK
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+
+    # Step 10: Upload APK to Release
+    - name: Upload APK to Release
+      if: success()
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: S01_初学HelloWorld项目_全中文注释/app/build/outputs/apk/release/S01_初学HelloWorld项目_全中文注释.apk
+        asset_name: S01_初学HelloWorld项目_全中文注释.apk
+        tag: ${{ github.ref }}
