@@ -64,9 +64,10 @@ jobs:
     # Step 7: Find the generated APK and rename it with the tag name
     - name: Find and Rename APK
       run: |
+        cd S01_初学HelloWorld项目_全中文注释
         APK_PATH=$(find app/build/outputs/apk/ -name "*.apk" | head -n 1)
         if [ -z "$APK_PATH" ]; then
           echo "APK not found"
           exit 1
         fi
-        mv "$APK_PATH" "app/build/outputs/apk/release/notify-me-${GITHUB_REF_NAME}.apk"
+        mv "$APK_PATH" "app/build/outputs/apk/release/S01_初学HelloWorld项目_全中文注释.apk"
