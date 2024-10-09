@@ -1,4 +1,4 @@
-name: Android CI
+name: S01_Hello_World Build APK
 
 on:
   workflow_dispatch: {}
@@ -12,10 +12,22 @@ permissions:
   
 jobs:
   build:
-    name: Build APK
+    name: S01_Hello_World Build APK
     runs-on: ubuntu-latest
+     env:
+      # 端口号
+      Port: 8080
+      # 云服务地址
+      Host_IP: "127.0.0.1"
 
     steps:
+    
+    # Step 0: 测试环境变量
+    - name: Use variable from environment
+      run: |
+        echo "端口号:$Port"
+        echo "服务器地址: $Host_IP"
+        
     # Step 1: Checkout the repository
     - name: Checkout Repository
       uses: actions/checkout@v3
@@ -40,7 +52,11 @@ jobs:
             
     # Step 4: Grant execute permission for Gradlew
     - name: Grant execute permission for gradlew
-      run: cd S01_初学HelloWorld项目_全中文注释 && chmod +x gradlew
+      run: |
+        echo "端口号:$Port"
+        echo "服务器地址: $Host_IP"
+        cd S01_初学HelloWorld项目_全中文注释
+        chmod +x gradlew
 
     # Step 5: Create a Keystore File
     - name: Create Keystore File
@@ -53,7 +69,11 @@ jobs:
 
     # Step 6: Build the APK
     - name: Build APK
-      run: cd S01_初学HelloWorld项目_全中文注释 && ./gradlew assembleRelease -PkeystorePath=${{ github.workspace }}/app/keystore.jks
+      run: |
+        echo "端口号:$Port"
+        echo "服务器地址: $Host_IP"
+        cd S01_初学HelloWorld项目_全中文注释
+        ./gradlew assembleRelease -PkeystorePath=${{ github.workspace }}/app/keystore.jks
       env:
         JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.12-7/x64
         NOTIFY_ME_KEYSTORE_PATH: ${{ github.workspace }}/app/keystore.jks
@@ -64,6 +84,8 @@ jobs:
     # Step 7: Find the generated APK and rename it with the tag name
     - name: Find and Rename APK
       run: |
+        echo "端口号:$Port"
+        echo "服务器地址: $Host_IP"
         cd S01_初学HelloWorld项目_全中文注释
         APK_PATH=$(find app/build/outputs/apk/ -name "*.apk" | head -n 1)
         if [ -z "$APK_PATH" ]; then
@@ -90,5 +112,5 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: S01_初学HelloWorld项目_全中文注释/app/build/outputs/apk/release/S01_初学HelloWorld项目_全中文注释.apk
-        asset_name: S01_初学HelloWorld项目_全中文注释.apk
+        asset_name: S01_Hello_World.apk
         tag: ${{ github.ref }}
