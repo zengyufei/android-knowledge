@@ -61,6 +61,14 @@ jobs:
         cd $dir_name
         chmod +x gradlew
 
+
+
+    # Step 5: Create a Keystore File
+    - name: Create Keystore File
+      run: |
+        echo "$NOTIFY_ME_KEYSTORE_BASE64" | tr -d '\n' | base64 -d > ${{ github.workspace }}/keystore.jks
+      env:
+        NOTIFY_ME_KEYSTORE_BASE64: ${{ secrets.NOTIFY_ME_KEYSTORE_BASE64 }}
         
 
     # Step 6: Build the APK
