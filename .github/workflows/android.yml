@@ -71,3 +71,13 @@ jobs:
           exit 1
         fi
         mv "$APK_PATH" "app/build/outputs/apk/release/S01_初学HelloWorld项目_全中文注释.apk"
+
+
+    # Step 8: Upload APK to GitHub Actions Artifacts (Optional)
+    - name: Upload APK Artifact
+      if: success()
+      uses: actions/upload-artifact@v3
+      with:
+        name: S01_初学HelloWorld项目_全中文注释.apk
+        path: app/build/outputs/apk/release/S01_初学HelloWorld项目_全中文注释.apk
+        if-no-files-found: warn
